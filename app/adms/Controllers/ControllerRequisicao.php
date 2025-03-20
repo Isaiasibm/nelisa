@@ -12,24 +12,18 @@ class ControllerRequisicao {
 
 		header('Content-Type: application/json; charset=utf-8');
 
-
 		$this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 		$regVenda = new \App\adms\Models\admsVenda();
 		$regItems = new \App\adms\Models\admsVenda();
 		$regPagVenda = new \App\adms\Models\admsVenda();
 		$regDetalhePag = new \App\adms\Models\admsVenda();
 		$updEstoque = new \App\adms\Models\admsVenda();
-	
-				
+					
 		if (isset($this->Dados['accao']) && $this->Dados['accao'] === "RealizarVenda") {
-
 				
 			$carrinho = json_decode($this->Dados['carrinho'], true);
 			if (!empty($carrinho)) {
-					
-		
-				
-			//$valorVendido= (double)$this->Dados['totalVenda'];
+		//$valorVendido= (double)$this->Dados['totalVenda'];
 			
 
 				$DadosVenda =  array('total'=>$this->Dados['totalVenda'],'id_usuario'=> (int) $_SESSION['usuario_id'],'data_venda'=>date('Y-m-d H:m:s'));
@@ -53,14 +47,15 @@ class ControllerRequisicao {
 
 									//Atualizar o estoque
 						
+/*
+							$itensVenda=array('quantidade_disponivel'=>$item["estoque"]);
+							$idProduto=$item["id"];							
+							//$updEstoque->updateEstoque($itensVenda,$idProduto);	
+							*/
+						
 
-							$itensVenda=array('quantidade_estoque'=>$item["estoque"]);	
-
-							$idProduto=$item["id"];
-							$updEstoque->updateEstoque($itensVenda,$idProduto);	
+							$updEstoque->decrementarEstoque($item["id"], $item["quantidade"]);
 							
-					
-								
 									//Calcular o valor total pago
 									$valorTotalPago = $this->Dados['emDinheiro'] + $this->Dados['multicaixa'] + $this->Dados['transferencia'];
 									//Registar dados na tabela Pagamento venda

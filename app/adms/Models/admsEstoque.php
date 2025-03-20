@@ -12,7 +12,7 @@ if (!defined('URL')) {
 class admsEstoque {
 
     private $Resultado;
-    
+    private $ResultadoPg;
     private $Dados;
     private $msg;
     private $RowCount; 
@@ -22,6 +22,10 @@ class admsEstoque {
 
     function getResultado() {
         return $this->Resultado;
+    }
+    function getResultadoPg()
+    {
+        return $this->ResultadoPg;
     }
 
     function getMsg() {
@@ -45,11 +49,31 @@ class admsEstoque {
 
     public function listarEstoqueGeral(){
       $listarPacienteUEO = new \App\adms\Models\helper\AdmsRead();
-                  $listarPacienteUEO->fullRead("SELECT tb_produtos.id_produto,tb_produtos.nome_produto,tb_produtos.id_produto, tb_produtos.data_validade, tb_categorias_produto.id_categoria, tb_produtos.quantidade_estoque,tb_produtos.quantidade_pacote,tb_fornecedores.nome AS fornecedor,tb_fornecedores.telefone AS telefoneFornecedor, tb_tipo_produto.descrição AS tipoProduto,tb_produtos.preco_venda,tb_produtos.data_compra 
-FROM tb_produtos
-INNER JOIN tb_fornecedores ON tb_produtos.id_forncedor=tb_fornecedores.id_fornecedor
-INNER JOIN tb_tipo_produto ON tb_produtos.id_tipo_produto=tb_tipo_produto.id
-INNER JOIN tb_categorias_produto ON tb_produtos.id_categoria=tb_categorias_produto.id_categoria");
+                  $listarPacienteUEO->fullRead("SELECT 
+    p.id_produto,
+    p.bar_code,
+    p.nome_produto,
+    SUM(e.quantidade) AS quantidade_total, -- Soma todas as quantidades de lotes diferentes do mesmo produto
+    MIN(e.data_validade) AS data_validade_mais_proxima, -- Traz a data de validade mais próxima
+    GROUP_CONCAT(DISTINCT e.lote ORDER BY e.data_validade ASC SEPARATOR ', ') AS lotes, -- Lista os códigos dos lotes ordenados pela validade
+    c.id_categoria,
+    c.nome AS categoria,
+    f.nome AS fornecedor,
+    f.telefone AS telefoneFornecedor,
+    tp.descrição AS tipoProduto,
+    pv.preco_venda,
+    e.data_compra,
+    e.data_validade
+FROM tb_estoque e
+INNER JOIN tb_produtos p ON e.id_produto = p.id_produto 
+INNER JOIN tb_fornecedores f ON e.id_fornecedor = f.id_fornecedor
+INNER JOIN tb_tipo_produto tp ON p.id_tipo_produto = tp.id
+INNER JOIN tb_categorias_produto c ON p.id_categoria = c.id_categoria
+LEFT JOIN tb_precos_venda pv ON p.id_produto = pv.id_produto 
+    AND pv.data_fim IS NULL -- Pega o preço de venda mais recente
+GROUP BY p.id_produto, p.bar_code, p.nome_produto, c.id_categoria, f.nome, f.telefone, tp.descrição, pv.preco_venda, e.data_compra
+ORDER BY p.nome_produto;
+");
                   return $listarPacienteUEO->getResultado();
       }
 
@@ -88,13 +112,64 @@ INNER JOIN tb_categorias_produto ON tb_produtos.id_categoria=tb_categorias_produ
             }
 
 
+
+            
+    public function cadastrarEstoque(array $dadosEstoque) {
+        $this->Dados = $dadosEstoque;
+        $this->ValidarDados();
+        if ($this->Resultado):
+           $Create = new \App\adms\Models\helper\AdmsCreate;
+
+        $Create->exeCreate('tb_estoque', $this->Dados);        
+        if ($Create->getResultado()>=1):
+            
+            $this->Resultado = $Create->getResultado();
+        else:
+          $this->msg = "<b>Erro:</b> Estoque não adicionado! tente novamente"; 
+          $this->Resultado = 0;           
+        endif;
+
+        else:
+          $this->msg = "<b>Erro:</b> Preencha de forma correta os campos dos dados do estoque"; 
+          $this->Resultado = 0;
+        endif;
+    }
+
+
+    private function validarDados() {
+        $this->Dados = array_map('strip_tags', $this->Dados);
+        $this->Dados = array_map('trim', $this->Dados);
+        if (in_array('', $this->Dados)):
+            $this->Resultado = false;
+        else:
+    //  $this->Dados['password'] = md5($this->Dados['password']);
+            $this->Resultado = true;
+        endif;
+    }
+
+// Pegar o estoque ------
+ /*   public function buscarDadosEstoque($idProduto){
+        $listarEstoque = new \App\adms\Models\helper\AdmsRead();
+                    $listarEstoque->fullRead("SELECT * FROM tb_estoque 
+                                                    WHERE tb_estoque.id_produto=:idProduto AND tb_estoque.quantidade_disponivel>0 
+                                                    ORDER BY tb_estoque.data_validade ASC;","idProduto={$idProduto}");
+                    return $listarEstoque->getResultado();
+        }
+        */
+
+       
+        
+
+
+
+
          
 
         public function updateEstoque(array $DadosEstoque, $idProduto){
           $this->Dados = $DadosEstoque;
 
           $upload = new \App\adms\Models\helper\AdmsUpdate();
-          $upload->exeUpdate("tb_produtos", $this->Dados, "WHERE id_produto =:id", "id=" . $idProduto);
+          $upload->exeUpdate("tb_estoque", $this->Dados, "WHERE id_produto =:id", "id=" . $idProduto);
 
           if ($upload->getResultado()) {
               $this->Resultado = true;

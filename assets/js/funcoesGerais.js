@@ -289,7 +289,7 @@ function atualizarCarrinho() {
     $("#carrinhoDiv").hide();
 
     // Após imprimir a fatura, recarregar a página
-    location.reload(); // Recarrega a página
+   // location.reload(); // Recarrega a página
 
 
   }); 
@@ -373,6 +373,40 @@ else{
   
 });
 
+        $('.select2').select2({
+            placeholder: "Digite, escaneie ou selecione um produto...",
+            allowClear: true
+        });
+
+
+
+
+         // Cálculo Automático do Preço de Compra do Item
+         function calcularPrecoCompraItem() {
+          let precoPacote = parseFloat($('#preco_custo_pacote').val()) || 0;
+          let qtdItensPacote = parseInt($('#qtNoPac').val()) || 1;
+
+          if (qtdItensPacote > 0) {
+              let precoItem = (precoPacote / qtdItensPacote).toFixed(2);
+              $('#preco_custo_item').val(precoItem);
+              calcularPrecoVendaItem(); // Atualiza também o preço de venda
+          }
+      }
+
+      // Cálculo Automático do Preço de Venda do Item
+      function calcularPrecoVendaItem() {
+          let precoItem = parseFloat($('#preco_custo_item').val()) || 0;
+          let percentualGanho = parseFloat($('#percentual_ganho').val()) || 0;
+
+          let precoVenda = (precoItem + (precoItem * percentualGanho / 100)).toFixed(2);
+          $('#preco_venda_item').val(precoVenda);
+      }
+
+      // Eventos para atualizar os preços ao preencher os campos
+      $('#preco_custo_pacote, #qtNoPac').on('input', calcularPrecoCompraItem);
+      $('#percentual_ganho').on('input', calcularPrecoVendaItem);
+  
+ 
 
 
 });

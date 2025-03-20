@@ -35,6 +35,59 @@ class controleProduto {
 
     public function registarProduto() {
 
+        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+      
+        $cadProduto = new \App\adms\Models\admsProduto();
+     
+        if (!empty($this->Dados['btnSubmitProduto'])):
+            unset($this->Dados['btnSubmitProduto']);
+
+            /*
+            if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
+
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
+              
+          }else{        
+          */  
+
+        // ====================== Script Para Registar Dados do Produto ====================
+
+                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],'nome_produto'=>$this->Dados["nome_produto"], 'descricao_produto'=>$this->Dados["descricao_produto"], 
+            'id_categoria'=>$this->Dados["id_categoria"],
+            'id_fabricante'=>$this->Dados["id_fabricante"],
+        'id_tipo_produto'=>$this->Dados["id_tipo_produto"],
+        'estoque_min'=>$this->Dados["estoque_minimo"],
+        'id_user'=> (int) $_SESSION['usuario_id'], 
+        'created_at'=>date('Y-m-d H:i:s'));
+          
+            $cadProduto->cadastrarProduto($dadosProduto);
+
+            if($cadProduto->getResultado()>=1){
+
+                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto registado com sucesso!
+                                    </div>";
+                                    unset($this->Dados);
+                    }
+                    else{
+
+                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível registar o produto"."</div>";
+                    }
+           
+        //===================================== Fim Script regista Produto ==============================
+            
+        endif; 
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $carregarView = new \Core\ConfigView("adms/Views/produtos/registarProduto", $this->Dados);
+        $carregarView->renderizar();
+
+        
+    }
+
+
+    public function adicionarProdutoEstoque() {
+
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
       
@@ -80,86 +133,35 @@ class controleProduto {
         endif; 
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/produtos/registarProduto", $this->Dados);
+        $carregarView = new \Core\ConfigView("adms/Views/produtos/adicionarProdutoEstoque", $this->Dados);
         $carregarView->renderizar();
 
         
     }
 
 
+    public function listarProduto($PageId = null)
+    {
+        $this->PageId = (int) $PageId ? $PageId : 1;
 
+        $botao = ['cad_pagina' => ['menu_controller' => 'cadastrar-pagina', 'menu_metodo' => 'cad-pagina'],
+            'vis_pagina' => ['menu_controller' => 'ver-pagina', 'menu_metodo' => 'ver-pagina'],
+            'edit_pagina' => ['menu_controller' => 'editar-pagina', 'menu_metodo' => 'edit-pagina'],
+            'del_pagina' => ['menu_controller' => 'apagar-pagina', 'menu_metodo' => 'apagar-pagina']];
+        $listarBotao = new \App\adms\Models\AdmsBotao();
+        $this->Dados['botao'] = $listarBotao->valBotao($botao);
 
-
-    /*
-   public function registarProduto() {
-
-
-        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-      
-        $CadPessoa = new \App\adms\Models\admsPaciente();
-        $cadPaciente = new \App\adms\Models\admsPaciente();
-      
-        if (!empty($this->Dados['btnSubmitProduto'])):
-            unset($this->Dados['btnSubmitProduto']);
-
-            if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
-
-                $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
-              
-          }else{          
-            $DadosPessoa = array('Nome'=>$this->Dados["nome"], 'Apelido'=>$this->Dados["apelido"], 'Cod_Sexo'=>$this->Dados["id_sexo"],'Telefone'=>$this->Dados["telefone"],'Email'=>$this->Dados["email"],'Numero_Documento'=>$this->Dados["documento"],'Cod_Municipio'=>$this->Dados["municipio"],'Data_Nascimento'=>$this->Dados["data_nascimento"],'Cod_Tipo_Documento'=>$this->Dados["tipoDOcumento"],'endereco_morada'=>$this->Dados["endereco"],'cod_usuario'=> (int) $_SESSION['usuario_id'],'created'=>date('Y-m-d H:i:s'));
-            
-            
-
-            $CadPessoa->cadastrarPessoa($DadosPessoa);
-
-            if($CadPessoa->getResultado()>=1){
-
-                //======================Script Para Registar Dados do Paciente ====================
-
-                    #ARRAY DE DADOS PARA INSERIR NA TABELA PACIENTE
-                    $Paciente = array('cod_pessoa'=>$CadPessoa->getResultado(),'cod_usuario' => $_SESSION['usuario_id'],'created'=>date('Y-m-d H:i:s'));
-
-                    $cadPaciente->cadastrarPaciente($Paciente);
-
-                    if($cadPaciente->getResultado()>=1){
-
-                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Paciente registado com sucesso!
-                                    </div>";
-
-                    }
-                    else{
-
-                        
-                        $CadPessoa->apagarPessoa($CadPessoa->getResultado());
-                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>".$cadPaciente->getMsg()."</div>";
-
-                    }
-
-                //======================Fim Script Para Registar Dados Militares====================
-
-            }else{
-
-                    $_SESSION['msgcad'] = "<div class='alert alert-danger'>".$CadPessoa->getMsg()."</div>";
-                 
-                }
-            //=====================================Fim Script regista Pessoa==============================
-
-      
-
-        }
-            
-        endif; 
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/pacientes/registarPaciente", $this->Dados);
+
+        $listarProduto = new \App\adms\Models\AdmsListarProduto();
+        $this->Dados['listPagina'] = $listarProduto->listarProduto($this->PageId);
+        $this->Dados['paginacao'] = $listarProduto->getResultadoPg();
+
+        $carregarView = new \Core\ConfigView("adms/Views/produtos/listarProduto", $this->Dados);
         $carregarView->renderizar();
-
-        
     }
-
-*/
-    
+  
     
 
 }

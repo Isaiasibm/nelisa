@@ -6,7 +6,7 @@
         <div class="d-flex">
             <div class="mr-auto p-2">
 
-                <h3 class="display-2 titulo">Listar Produtos em Estoque</h3>
+                <h3 class="display-2 titulo">Listar Saídas</h3>
             </div>
 
             <div class="p-2">
@@ -26,7 +26,7 @@
                     <select class="form-control" name="tipoLista" id="tipoLista" required="">
                         <option value=""> Selecione </option>
                         <option value="1"> Geral </option>
-                        <option value="2"> Por Fornecedor </option>
+                        <option value="2"> Saídas por Funcionário</option>
                         <option value="3"> Por data de compra </option>
                         <option value="4"> Por data de registo </option>
 
@@ -110,39 +110,47 @@
             <thead>
                 <tr>
                     <th>#</th>                    
-                    <th > Nome do Produto </th>
-                    <th > Código Barras </th>
-                    <th >Preço</th>
-                    <th>Quant Estoque</th>
-                    <th >Fornecedor</th>
-                    <th >Tipo Produto</th>
-                    <th >Data da Compra</th>
-                    <th >Data Validade</th>
+                    <th > Tipo de Saída </th>
+                    <th > Valor Kz</th>
+                    <th >Data</th>
+                    <th>Descrição</th>
+                    <th >Destinatário</th>
+                    <th >Responsável</th>
+                    <th >Quem Autorizou</th>
+                    <th >Estado da Saída</th>
                     <th>Acções</th>
                 </tr>
             </thead>
             <tbody>
         <?php
         
-            if(!empty($this->Dados['listEstoque'])):
+            if(!empty($this->Dados['listSaida'])):
                 $i=1;
                 //  var_dump($this->Dados['listEstoque']);
                 // $relatorio  = new \App\adms\Models\ModelsPaciente();  
-                foreach ($this->Dados['listEstoque'] as $r)
+                foreach ($this->Dados['listSaida'] as $r)
                 {        
                         extract($r);                                       
                                                     
                     echo "<tr>
-                            <td class='tg-lboi'>$id_produto</td>
+                   
+
+
+
+
+                        <td class='tg-lboi'>$i</td>
+
+
+                            <td class='tg-lboi'>$id_tipo_saida</td>
                             
-                            <td class='tg-lboi'>$nome_produto </td>
-                            <td class='tg-lboi'>$bar_code </td>
-                            <td class='tg-lboi'>$preco_venda</td>
-                            <td class='tg-lboi'>$quantidade_total</td>
-                             <td class='tg-lboi'>$fornecedor</td>
-                              <td class='tg-lboi'>$tipoProduto</td>
-                            <td class='tg-lboi'>$data_compra</td>
-                            <td class='tg-lboi'> $data_validade</td> 
+                            <td class='tg-lboi'>$valor Kz</td>
+                            <td class='tg-lboi'>$data_saida </td>
+                            <td class='tg-lboi'>$descricao</td>
+                            <td class='tg-lboi'>$nome_destinatario</td>
+                             <td class='tg-lboi'>$nome_responsavel_saida</td>
+                              <td class='tg-lboi'>$nome_autorizou</td>
+                            <td class='tg-lboi'>$id_estado_saida</td>
+                   
      
                      
                            
@@ -154,11 +162,9 @@
                                             </a>
                                          
 
-
                                             <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-                                            <a class='dropdown-item' href='";?> <?php echo URLADM . 'EditarProduto/editProduto/' . $id_produto; ?> <?php echo " '>Editar Produto</a>
-                                                <a class='dropdown-item' href='<?php echo URLADM . 'ControleMilitar/visualizarMilitar/' . $id_produto;'>Mais detalhes</a>
-                                                <a class='dropdown-item' href=' URLADM . 'controleEscalaServico/alterData/' . $id_produto;'>Adicionar Estoque</a>
+                                                <a class='dropdown-item' href='<?php echo URLADM . 'ControleMilitar/visualizarMilitar/' . $id;'>Mais detalhes</a>
+                                                <a class='dropdown-item' href=' URLADM . 'controleEscalaServico/alterData/' . $id;'>Adicionar Estoque</a>
                                                
                                                
 

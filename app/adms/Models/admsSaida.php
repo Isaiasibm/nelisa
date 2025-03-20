@@ -6,11 +6,11 @@ if (!defined('URL')) {
     exit();
 } 
 /**
- * Descricao de admsProduto
+ * Descricao de admsSaida
  *
  * @copyright (c) 2025 IBM
  */
-class admsProduto {
+class admsSaida {
 
     private $Resultado;
     private $EspecialistaId;
@@ -36,23 +36,23 @@ class admsProduto {
 
 
 
-    public function cadastrarProduto(array $dadosProduto) {
+    public function cadastrarSaida(array $dadosProduto) {
         $this->Dados = $dadosProduto;
         $this->ValidarDados();
         if ($this->Resultado):
            $Create = new \App\adms\Models\helper\AdmsCreate;
 
-        $Create->exeCreate('tb_produtos', $this->Dados);        
+        $Create->exeCreate('tb_saidas', $this->Dados);        
         if ($Create->getResultado()>=1):
             
             $this->Resultado = $Create->getResultado();
         else:
-          $this->msg = "<b>Erro:</b> Produtos não registados! tente novamente"; 
+          $this->msg = "<b>Erro:</b> Saída não registada! tente novamente"; 
           $this->Resultado = 0;           
         endif;
 
         else:
-          $this->msg = "<b>Erro:</b> Preencha de forma correta os campos dos dados do produto"; 
+          $this->msg = "<b>Erro:</b> Preencha de forma correta os campos dos dados da saída"; 
           $this->Resultado = 0;
         endif;
     }
@@ -70,23 +70,23 @@ class admsProduto {
     }
 
 
-    public function listarProdutos(){
+    public function lisatarSaidas(){
         $listProdutos = new \App\adms\Models\helper\AdmsRead();
                     $listProdutos->fullRead("SELECT 
-    p.id_produto,
-    p.bar_code, 
-    p.nome_produto, 
-    e.preco_venda,
-    COALESCE(SUM(e.quantidade_disponivel), 0) AS quantidade_estoque, -- Soma todas as quantidades disponíveis
-    MIN(e.data_validade) AS data_validade, -- Pega a data de validade mais próxima
-    f.nome_fabricante, 
-    tp.descrição AS tipoProduto
-FROM tb_produtos p
-LEFT JOIN tb_fabricante f ON p.id_fabricante = f.id
-LEFT JOIN tb_tipo_produto tp ON p.id_tipo_produto = tp.id
-LEFT JOIN tb_estoque e ON p.id_produto = e.id_produto -- Novo join com a tabela de estoque
-GROUP BY p.id_produto, p.bar_code, p.nome_produto, f.nome_fabricante, tp.descrição
-ORDER BY nome_produto, MIN(e.data_validade) ASC; -- Ordena pela data de validade mais próxima");
+  s.id,
+  s.data_saida,
+  s.descricao,
+  pa.Nome AS nome_autorizou,
+  pd.Nome AS nome_destinatario,
+  pr.Nome AS nome_responsavel_saida,
+  s.id_estado_saida,
+  s.id_tipo_saida,
+  s.valor
+FROM tb_saidas s
+LEFT JOIN tb_pessoa pa ON s.id_autorizou = pa.Cod_Pessoa
+LEFT JOIN tb_pessoa pd ON s.id_destinatario = pd.Cod_Pessoa
+LEFT JOIN tb_pessoa pr ON s.id_responsavel_saida = pr.Cod_Pessoa;
+ORDER BY tb_saidas.data_saida;");
                     return $listProdutos->getResultado();
         }
 

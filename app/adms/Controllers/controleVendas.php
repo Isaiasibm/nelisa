@@ -44,6 +44,7 @@ class controleVendas {
 
         $this->Dados['menu'] = $listarMenu->itemMenu();
         $this->Dados['listProd'] = $listProdutos->listarProdutos();
+       // var_dump($this->Dados['listProd']);
 
         //Há uma requisição ajax que realiza o processo via javascript
        

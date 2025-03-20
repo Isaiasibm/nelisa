@@ -68,7 +68,7 @@
                 
               </div>
             <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                         <label><span class="text-danger">*</span>Tipo de Produto</label>
                         <select class="form-control" name="id_tipo_produto" required="" id="id_tipo_produto">
                             <option value="">Selecione o tipo</option>
@@ -85,27 +85,11 @@
                             ?>
                         </select>
                 </div> 
-                      <div class="form-group col-md-2">
-                          <label><span class="text-danger">*</span> Qtdade no Pacote:</label>
-                          <input type="text"  class="form-control" name="quantPacote" autocomplete="no" placeholder="Escreva a quantidade"   required="" id="quantPacote">
-                      </div>
-                      <div class="form-group col-md-2">
-                          <label><span class="text-danger">*</span> Preço de Compra:</label>
-                          <input type="text"  class="form-control" name="preco_compra" autocomplete="no" placeholder="Escreva o Preço da compra"   required="" id="preco_compra">
-                      </div>
+                    
+                    
 
-                      <div class="form-group col-md-2">
-                          <label><span class="text-danger">*</span> Preço de Venda:</label>
-                          <input type="text"  class="form-control" name="preco_venda" autocomplete="no" placeholder="Escreva o Preço da venda"   required="" id="preco_venda">
-                      </div>
-                      <div class="form-group col-md-2">
-                          <label><span class="text-danger">*</span> Qtdade de Ítens:</label>
-                          <input type="text"  class="form-control" name="quantidade_estoque" autocomplete="no" placeholder="Escreva a quantidade de produtos"   required="" id="quantidade_estoque">
-                      </div>
-            
-                      </div>
-
-                      <div class="form-row">    
+                   
+                   
 
                   
             
@@ -127,45 +111,17 @@
                             ?>
                         </select>
                 </div>  
-                <div class="form-group col-md-3"  >
-                    <label><span class="text-danger">*</span> Fornecedor </label>
-                    <select class="form-control" name="id_forncedor" id="id_forncedor">
-                        <option value=""> Selecione </option>
-                        <?php
-                        $vis = new \App\adms\Models\helper\AdmsRead();
-                        $vis->ExeRead('tb_fornecedores');
 
-                        foreach ($vis->getResultado() as $doc):
-                            extract($doc);
-                            $codFOrnecedor = $doc['id_fornecedor'];
-                            $nomeFornecedor = $doc['nome'];
-
-                            echo "<option value='$codFOrnecedor'>$nomeFornecedor</option>";
-                        endforeach;
-                        ?>
-                    </select>
-                </div>            
-                <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Data de Fabrico </label>
-                    <input type="date"  class="form-control" name="data_fabrico" id="data_fabrico"  value="">
+                <div class="form-group col-md-3">
+                    <label><span class="text-danger">*</span> Estoque Mínimo:</label>
+                    <input type="number"  class="form-control" name="estoque_minimo" placeholder="estoque mínimo">
                 </div>
+               
+              
 
      
-                <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Data de Validade </label>
-                    <input type="date"  class="form-control" name="data_validade" id="data_validade"  value="<?php
-                    if (isset($this->Dados['data_validade'])): echo $this->Dados['data_validade'];
-                    endif;
-                    ?>" required="">
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Data de Compra </label>
-                    <input type="date"  class="form-control" name="data_compra" id="data_fabrico"  value="">
-                </div>
-
-
-                      
+               
+                                    
                
   </div>
             

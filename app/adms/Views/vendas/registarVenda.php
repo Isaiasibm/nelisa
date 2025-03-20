@@ -60,7 +60,7 @@
                         extract($r);                                       
                                                     
                     echo "<tr>
-                            <td class='tg-lboi'>$i</td>
+                            <td class='tg-lboi'>$id_produto</td>
                              <td class='tg-lboi'>$bar_code</td>
                             <td class='tg-lboi'>$nome_produto </td>
                             <td class='tg-lboi'>$preco_venda</td>
