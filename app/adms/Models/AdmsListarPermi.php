@@ -59,10 +59,9 @@ class AdmsListarPermi
     
     public function verNivAc($DadosId)
     {
-        $this->DadosId = (int) $DadosId;
         $verNivAc = new \App\adms\Models\helper\AdmsRead();
         $verNivAc->fullRead("SELECT id, nome FROM adms_niveis_acessos 
-                WHERE id =:id LIMIT :limit", "id=".$this->DadosId."&limit=1");
+                WHERE id =:id LIMIT :limit", "id=".$DadosId."&limit=1");
         $this->Resultado= $verNivAc->getResultado();
         return $this->Resultado;
     }

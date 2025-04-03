@@ -85,6 +85,55 @@ class controleProduto {
         
     }
 
+    
+    public function editarProduto() {
+
+        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+      
+        $cadProduto = new \App\adms\Models\admsProduto();
+     
+        if (!empty($this->Dados['btnSubmitProduto'])):
+            unset($this->Dados['btnSubmitProduto']);
+
+       /*
+       if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
+
+           $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
+              
+     }else{        
+     */  
+
+   // ====================== Script Para Registar Dados do Produto ====================
+
+                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],
+        'id_user'=> (int) $_SESSION['usuario_id'], 'updated_at'=>date('Y-m-d H:i:s'));
+          
+            $cadProduto->editarProduto($dadosProduto, $this->Dados["id_produto"]);
+
+            if($cadProduto->getResultado()>=1){
+
+                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto atualizado com sucesso!
+                                    </div>";
+                                    unset($this->Dados);
+                    }
+                    else{
+
+                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível atualizar o produto"."</div>";
+                    }
+           
+        //===================================== Fim Script regista Produto ==============================
+            
+        endif; 
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $carregarView = new \Core\ConfigView("adms/Views/produtos/atualizarProduto", $this->Dados);
+        $carregarView->renderizar();
+
+        
+    }
+
+
 
     public function adicionarProdutoEstoque() {
 

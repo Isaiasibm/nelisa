@@ -76,21 +76,45 @@ class admsProduto {
     p.id_produto,
     p.bar_code, 
     p.nome_produto, 
-    e.preco_venda,
-    COALESCE(SUM(e.quantidade_disponivel), 0) AS quantidade_estoque, -- Soma todas as quantidades disponíveis
-    MIN(e.data_validade) AS data_validade, -- Pega a data de validade mais próxima
+    (
+        SELECT e1.preco_venda 
+        FROM tb_estoque e1 
+        WHERE e1.id_produto = p.id_produto 
+        ORDER BY e1.created_at DESC 
+        LIMIT 1
+    ) AS preco_venda,
+    COALESCE(SUM(e.quantidade_disponivel), 0) AS quantidade_estoque,
+    MIN(e.data_validade) AS data_validade,
     f.nome_fabricante, 
     tp.descrição AS tipoProduto
 FROM tb_produtos p
 LEFT JOIN tb_fabricante f ON p.id_fabricante = f.id
 LEFT JOIN tb_tipo_produto tp ON p.id_tipo_produto = tp.id
-LEFT JOIN tb_estoque e ON p.id_produto = e.id_produto -- Novo join com a tabela de estoque
-GROUP BY p.id_produto, p.bar_code, p.nome_produto, f.nome_fabricante, tp.descrição
-ORDER BY nome_produto, MIN(e.data_validade) ASC; -- Ordena pela data de validade mais próxima");
+LEFT JOIN tb_estoque e ON p.id_produto = e.id_produto
+GROUP BY 
+    p.id_produto, 
+    p.bar_code, 
+    p.nome_produto, 
+    f.nome_fabricante, 
+    tp.descrição
+ORDER BY p.nome_produto ASC, data_validade ASC;
+;
+");
                     return $listProdutos->getResultado();
         }
 
-        
+        public function editarProduto(array $DadosProduto, $codProduto){
+            $this->Dados = $DadosProduto;
+
+            $upload = new \App\adms\Models\helper\AdmsUpdate();
+            $upload->exeUpdate("tb_produtos", $this->Dados, "WHERE id_produto =:id_produto", "id_produto=" . $codProduto);
+
+            if ($upload->getResultado()) {
+                $this->Resultado = true;
+            } else {
+                $this->Resultado = false;
+            }
+        }  
 
      
 
