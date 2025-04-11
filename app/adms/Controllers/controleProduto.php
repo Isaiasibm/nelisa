@@ -106,7 +106,7 @@ class controleProduto {
    // ====================== Script Para Registar Dados do Produto ====================
 
                     #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],
+            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],'id_tipo_produto'=>$this->Dados["id_tipo_produto"],
         'id_user'=> (int) $_SESSION['usuario_id'], 'updated_at'=>date('Y-m-d H:i:s'));
           
             $cadProduto->editarProduto($dadosProduto, $this->Dados["id_produto"]);

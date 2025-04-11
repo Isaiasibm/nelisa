@@ -50,6 +50,24 @@
                     <label><span class="text-danger">*</span> Código de Barra</label>
                     <input type="text" id="bar_code" name="bar_code" class="form-control" autofocus>
                 </div>
+
+                <div class="form-group col-md-3">
+                        <label><span class="text-danger">*</span>Tipo de Produto</label>
+                        <select class="form-control" name="id_tipo_produto" required="" id="id_tipo_produto">
+                            <option value="">Selecione o tipo</option>
+                            <?php
+                            $vis = new \App\adms\Models\helper\AdmsRead();
+                            $vis->ExeRead('tb_tipo_produto');
+
+                            foreach ($vis->getResultado() as $doc):
+                                extract($doc);
+                                $idTipo = $doc['id'];
+                                $descricaoTipo = $doc['descrição'];
+                                echo "<option value='$idTipo'>$descricaoTipo</option>";
+                            endforeach;
+                            ?>
+                        </select>
+                </div> 
             </div>
 
             <input type="submit" class="btn btn-success" name="btnSubmitProduto" value="Atualizar">
