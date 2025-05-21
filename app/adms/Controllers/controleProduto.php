@@ -94,14 +94,7 @@ class controleProduto {
      
         if (!empty($this->Dados['btnSubmitProduto'])):
             unset($this->Dados['btnSubmitProduto']);
-
-       /*
-       if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
-
-           $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
-              
-     }else{        
-     */  
+  
 
    // ====================== Script Para Registar Dados do Produto ====================
 

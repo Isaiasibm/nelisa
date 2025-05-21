@@ -14,7 +14,7 @@ if (!defined('URL')) {
  *
  * @copyright (c) 2025, Nelisa Farma
  */
-class controleVendas {
+class controleVendas extends Controller {
 
     private $Resultado;
     private $Dados;

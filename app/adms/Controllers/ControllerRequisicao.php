@@ -3,7 +3,7 @@
 
 namespace App\adms\Controllers;
 
-class ControllerRequisicao {
+class ControllerRequisicao extends Controller {
     private $Dados;
     private $result;
 
@@ -79,6 +79,10 @@ class ControllerRequisicao {
 												$regDetalhePag->cadastrarDetalhesPagamento($detalhePag);
 											}
 											
+											$this->result = [
+												'success' => true,
+												'message' => 'Venda realizada com sucesso Ok OK',
+											];
 										
 										}
 
@@ -87,10 +91,7 @@ class ControllerRequisicao {
 			
 						} 
 				
-						$this->result = [
-							'success' => true,
-							'message' => 'Venda realizada com sucesso Ok OK',
-						];	
+							
 			// var_dump($this->result);
 					} else {
 						$this->result = [

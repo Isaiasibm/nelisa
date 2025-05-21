@@ -211,23 +211,8 @@ function atualizarCarrinho() {
       success: function (response) {
         if (response.success) {
           alert("Venda realizada com sucesso");
-   
 
-          carrinhoData = []; // Limpa o carrinho após sucesso
-          atualizarCarrinho();
-          $("#carrinhoDiv").hide();
-          
-        } else {
-          alert("Erro ao realizar a venda: " + response.message);
-        }
-      },
-
-      error: function (xhr, status, error) {
-        console.error("Erro na requisição:", xhr.responseText);
-      },
-    });
-
-    //Imprimir fatura
+             //Imprimir fatura
     const invoiceData = {
       date: new Date().toLocaleString(),
       items: carrinhoData,
@@ -286,8 +271,26 @@ function atualizarCarrinho() {
     printWindow.print();
     printWindow.close();
 
-    $("#carrinhoDiv").hide();
+   
 
+
+   
+
+          carrinhoData = []; // Limpa o carrinho após sucesso
+          atualizarCarrinho();
+          $("#carrinhoDiv").hide();
+          
+        } else {
+          alert("Erro ao realizar a venda: " + response.message);
+        }
+      },
+
+      error: function (xhr, status, error) {
+        console.error("Erro na requisição:", xhr.responseText);
+      },
+    });
+
+   
     // Após imprimir a fatura, recarregar a página
    // location.reload(); // Recarrega a página
 
@@ -407,6 +410,7 @@ else{
       $('#percentual_ganho').on('input', calcularPrecoVendaItem);
   
  
+  
 
 
 });

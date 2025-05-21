@@ -140,50 +140,92 @@ class admsVenda {
 
     public function listarVendasRelatGeral(){
       $listarPacienteUEO = new \App\adms\Models\helper\AdmsRead();
-                  $listarPacienteUEO->fullRead("SELECT tb_produtos.id_produto, tb_produtos.nome_produto, 
-                                              tb_item_venda.quantidade AS quant, 
-                                              tb_item_venda.subtotal AS subtotal, tb_produtos.preco_venda, 
-                                              tb_tipo_produto.descrição AS tipoProduto, adms_usuarios.nome AS nome_user 
-                                              FROM tb_item_venda 
-                                              INNER JOIN tb_produtos ON tb_item_venda.id_produto=tb_produtos.id_produto 
-                                              INNER JOIN venda ON tb_item_venda.id_venda=venda.id_venda 
-                                              LEFT JOIN tb_tipo_produto ON tb_produtos.id_tipo_produto=tb_tipo_produto.id 
-                                               INNER JOIN adms_usuarios ON tb_item_venda.id_usuario=adms_usuarios.id                                                
-                                              ;");
+                  $listarPacienteUEO->fullRead("SELECT 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    SUM(tb_item_venda.quantidade) AS quant, 
+    SUM(tb_item_venda.subtotal) AS subtotal, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição AS tipoProduto
+FROM tb_item_venda 
+INNER JOIN tb_produtos 
+    ON tb_item_venda.id_produto = tb_produtos.id_produto 
+INNER JOIN venda 
+    ON tb_item_venda.id_venda = venda.id_venda 
+LEFT JOIN tb_tipo_produto 
+    ON tb_produtos.id_tipo_produto = tb_tipo_produto.id 
+GROUP BY 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição
+ORDER BY 
+    tb_produtos.nome_produto;
+;");
                   return $listarPacienteUEO->getResultado();
       }
 
         
       public function listarVendasRelatGeralData($data1,$data2){
         $listarPacienteUEO = new \App\adms\Models\helper\AdmsRead();
-                    $listarPacienteUEO->fullRead("SELECT tb_produtos.id_produto, tb_produtos.nome_produto, 
-                                                tb_item_venda.quantidade AS quant, 
-                                                tb_item_venda.subtotal AS subtotal, tb_produtos.preco_venda, 
-                                                tb_tipo_produto.descrição AS tipoProduto, adms_usuarios.nome AS nome_user 
-                                                FROM tb_item_venda 
-                                                INNER JOIN tb_produtos ON tb_item_venda.id_produto=tb_produtos.id_produto 
-                                                INNER JOIN venda ON tb_item_venda.id_venda=venda.id_venda 
-                                                LEFT JOIN tb_tipo_produto ON tb_produtos.id_tipo_produto=tb_tipo_produto.id 
-                                                 INNER JOIN adms_usuarios ON tb_item_venda.id_usuario=adms_usuarios.id
-                                                WHERE tb_item_venda.created BETWEEN :data1 AND :data2 
-                                                ;","data1={$data1}&data2={$data2}");
+                    $listarPacienteUEO->fullRead("SELECT 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    SUM(tb_item_venda.quantidade) AS quant, 
+    SUM(tb_item_venda.subtotal) AS subtotal, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição AS tipoProduto
+FROM tb_item_venda 
+INNER JOIN tb_produtos 
+    ON tb_item_venda.id_produto = tb_produtos.id_produto 
+INNER JOIN venda 
+    ON tb_item_venda.id_venda = venda.id_venda 
+LEFT JOIN tb_tipo_produto 
+    ON tb_produtos.id_tipo_produto = tb_tipo_produto.id 
+-- usuário removido para evitar repetição
+WHERE tb_item_venda.created BETWEEN :data1 AND :data2 
+GROUP BY 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição
+ORDER BY 
+    tb_produtos.nome_produto;
+    ;","data1={$data1}&data2={$data2}");
                     return $listarPacienteUEO->getResultado();
         }
 
         
           public function listarVendasRelatUserData($idUser,$data1,$data2){
             $listarPacienteUEO = new \App\adms\Models\helper\AdmsRead();
-                        $listarPacienteUEO->fullRead("SELECT tb_produtos.id_produto, tb_produtos.nome_produto, 
-                                                    tb_item_venda.quantidade AS quant, 
-                                                    tb_item_venda.subtotal AS subtotal, tb_produtos.preco_venda, 
-                                                    tb_tipo_produto.descrição AS tipoProduto, adms_usuarios.nome AS nome_user 
-                                                    FROM tb_item_venda 
-                                                    INNER JOIN tb_produtos ON tb_item_venda.id_produto=tb_produtos.id_produto 
-                                                    INNER JOIN venda ON tb_item_venda.id_venda=venda.id_venda 
-                                                    LEFT JOIN tb_tipo_produto ON tb_produtos.id_tipo_produto=tb_tipo_produto.id 
-                                                    INNER JOIN adms_usuarios ON tb_item_venda.id_usuario=adms_usuarios.id
-                                                    WHERE tb_item_venda.id_usuario=:idUser AND tb_item_venda.created BETWEEN :data1 AND :data2 
-                                                    ;","idUser={$idUser}&data1={$data1}&data2={$data2}");
+                        $listarPacienteUEO->fullRead("SELECT 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    SUM(tb_item_venda.quantidade) AS quant, 
+    SUM(tb_item_venda.subtotal) AS subtotal, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição AS tipoProduto, 
+    adms_usuarios.nome AS nome_user
+FROM tb_item_venda 
+INNER JOIN tb_produtos 
+    ON tb_item_venda.id_produto = tb_produtos.id_produto 
+INNER JOIN venda 
+    ON tb_item_venda.id_venda = venda.id_venda 
+LEFT JOIN tb_tipo_produto 
+    ON tb_produtos.id_tipo_produto = tb_tipo_produto.id 
+INNER JOIN adms_usuarios 
+    ON tb_item_venda.id_usuario = adms_usuarios.id
+WHERE 
+    tb_item_venda.id_usuario = :idUser 
+    AND tb_item_venda.created BETWEEN :data1 AND :data2 
+GROUP BY 
+    tb_produtos.id_produto, 
+    tb_produtos.nome_produto, 
+    tb_produtos.preco_venda, 
+    tb_tipo_produto.descrição, 
+    adms_usuarios.nome
+ORDER BY 
+    tb_produtos.nome_produto;","idUser={$idUser}&data1={$data1}&data2={$data2}");
                         return $listarPacienteUEO->getResultado();
             }
 

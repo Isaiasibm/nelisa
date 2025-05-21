@@ -97,9 +97,7 @@ GROUP BY
     p.nome_produto, 
     f.nome_fabricante, 
     tp.descrição
-ORDER BY p.nome_produto ASC, data_validade ASC;
-;
-");
+ORDER BY p.nome_produto ASC, data_validade ASC; ");
                     return $listProdutos->getResultado();
         }
 
