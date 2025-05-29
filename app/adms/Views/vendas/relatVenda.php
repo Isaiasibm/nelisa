@@ -205,11 +205,11 @@
 
 <br><br>
 
-            <p class="text-center mt-4"> Luanda, aos <?php echo date("d/m/Y"); ?> </p>
+
+            <h5 style="text-align:center"> Luanda, aos <?php echo date("d/m/Y"); ?> </h5>
 
   
-    <p class="text-center mt-5"> O Responsável
-                    </p>
+    <p class="text-center mt-5"> O Responsável </p>
     <p class="text-center">___________________________________
                     </p>
 

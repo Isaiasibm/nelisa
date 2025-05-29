@@ -47,7 +47,7 @@ class admsSaida {
             
             $this->Resultado = $Create->getResultado();
         else:
-          $this->msg = "<b>Erro:</b> Saída não registada! tente novamente"; 
+          $this->msg = "<b> Erro:</b> Saída não registada! tente novamente"; 
           $this->Resultado = 0;           
         endif;
 
@@ -81,15 +81,64 @@ class admsSaida {
   pr.Nome AS nome_responsavel_saida,
   s.id_estado_saida,
   s.id_tipo_saida,
-  s.valor
+  s.valor,
+	ts.descricao AS tipo_saida
 FROM tb_saidas s
 LEFT JOIN tb_pessoa pa ON s.id_autorizou = pa.Cod_Pessoa
 LEFT JOIN tb_pessoa pd ON s.id_destinatario = pd.Cod_Pessoa
-LEFT JOIN tb_pessoa pr ON s.id_responsavel_saida = pr.Cod_Pessoa;
-ORDER BY tb_saidas.data_saida;");
+LEFT JOIN tb_pessoa pr ON s.id_responsavel_saida = pr.Cod_Pessoa
+INNER JOIN tb_tipo_saida ts ON s.id_tipo_saida = ts.id 
+ORDER BY s.data_saida DESC;");
                     return $listProdutos->getResultado();
         }
 
+
+        public function lisatarSaidasData($data){
+            $listProdutos = new \App\adms\Models\helper\AdmsRead();
+                        $listProdutos->fullRead("SELECT 
+      s.id,
+      s.data_saida,
+      s.descricao,
+      pa.Nome AS nome_autorizou,
+      pd.Nome AS nome_destinatario,
+      pr.Nome AS nome_responsavel_saida,
+      s.id_estado_saida,
+      s.id_tipo_saida,
+      s.valor,
+        ts.descricao AS tipo_saida
+    FROM tb_saidas s
+    LEFT JOIN tb_pessoa pa ON s.id_autorizou = pa.Cod_Pessoa
+    LEFT JOIN tb_pessoa pd ON s.id_destinatario = pd.Cod_Pessoa
+    LEFT JOIN tb_pessoa pr ON s.id_responsavel_saida = pr.Cod_Pessoa
+    INNER JOIN tb_tipo_saida ts ON s.id_tipo_saida = ts.id WHERE s.data_saida=:dataSaida
+    ORDER BY s.data_saida DESC;","dataSaida={$data}");
+                        return $listProdutos->getResultado();
+            }
+
+
+            public function lisatarSaidasIntervaloData($data1, $data2){
+                $listProdutos = new \App\adms\Models\helper\AdmsRead();
+                            $listProdutos->fullRead("SELECT 
+          s.id,
+          s.data_saida,
+          s.descricao,
+          pa.Nome AS nome_autorizou,
+          pd.Nome AS nome_destinatario,
+          pr.Nome AS nome_responsavel_saida,
+          s.id_estado_saida,
+          s.id_tipo_saida,
+          s.valor,
+            ts.descricao AS tipo_saida
+        FROM tb_saidas s
+        LEFT JOIN tb_pessoa pa ON s.id_autorizou = pa.Cod_Pessoa
+        LEFT JOIN tb_pessoa pd ON s.id_destinatario = pd.Cod_Pessoa
+        LEFT JOIN tb_pessoa pr ON s.id_responsavel_saida = pr.Cod_Pessoa
+        INNER JOIN tb_tipo_saida ts ON s.id_tipo_saida = ts.id WHERE s.data_saida BETWEEN :data1 AND :data2
+        ORDER BY s.data_saida DESC;","data1={$data1}&data2={$data2}");
+                            return $listProdutos->getResultado();
+                }
+
+            
         
 
      

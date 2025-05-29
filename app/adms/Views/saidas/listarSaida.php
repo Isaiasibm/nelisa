@@ -18,17 +18,17 @@
         <hr style="color: #8fdc8f ">
 
         <form name="listarMeios" action="" method="post" enctype="multipart/form-data" autocomplete="off"
-            id="listarEscala">
+            id="">
             <div class="form-row">
 
                 <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span>Escolha o tipo de lista</label>
-                    <select class="form-control" name="tipoLista" id="tipoLista" required="">
+                    <select class="form-control" name="tipoListaSaida" id="tipoListaSaida" required="">
                         <option value=""> Selecione </option>
                         <option value="1"> Geral </option>
-                        <option value="2"> Saídas por Funcionário</option>
-                        <option value="3"> Por data de compra </option>
-                        <option value="4"> Por data de registo </option>
+                        <option value="2"> por data de saída</option>
+                        <option value="3"> Saídas por intervalo de data</option>
+                    
 
 
                     </select>
@@ -64,30 +64,17 @@
 
                 <div class="form-group col-md-1">
                     <br>
-                    <button type="submit" class="btn btn-success" value="btnListarVenda"
-                        name="btnListarVenda">Listar</button>
+                    <button type="submit" class="btn btn-success" value="brtnListarSaida"
+                        name="brtnListarSaida">Listar</button>
 
                 </div>
 
             </div>
         </form>
 
-        <?php
-    if (isset($_SESSION['msg'])):
-        echo $_SESSION['msg'];
-        unset($_SESSION['msg']);
-    endif;
-    if (isset($_SESSION['msgcad'])):
-        echo $_SESSION['msgcad'];
-        unset($_SESSION['msgcad']);
-    endif;
-
-
-    ?>
 <?php
     header('Content-type: text/html; charset=utf-8');
 ?>
-
         <hr style="color: #8fdc8f ">
     <?php
     if (isset($_SESSION['msg'])):
@@ -98,9 +85,9 @@
         echo $_SESSION['msgcad'];
         unset($_SESSION['msgcad']);
     endif;
-
-
     ?>
+
+    <h3 style="text-align:center;"> <?php echo $this->Dados['textoSaida']; ?> </h3>
         
 <div class="form-row">
 
@@ -111,13 +98,12 @@
                 <tr>
                     <th>#</th>                    
                     <th > Tipo de Saída </th>
-                    <th > Valor Kz</th>
-                    <th >Data</th>
                     <th>Descrição</th>
-                    <th >Destinatário</th>
+                    <th > Valor Kz</th>
+                    <th >Data</th>       
                     <th >Responsável</th>
                     <th >Quem Autorizou</th>
-                    <th >Estado da Saída</th>
+                  
                     <th>Acções</th>
                 </tr>
             </thead>
@@ -130,31 +116,19 @@
                 // $relatorio  = new \App\adms\Models\ModelsPaciente();  
                 foreach ($this->Dados['listSaida'] as $r)
                 {        
-                        extract($r);                                       
-                                                    
+                        extract($r);    
+                        $dataS = date('d/m/Y', strtotime($data_saida));                                                  
                     echo "<tr>
-                   
-
-
-
-
                         <td class='tg-lboi'>$i</td>
 
 
-                            <td class='tg-lboi'>$id_tipo_saida</td>
-                            
+                            <td class='tg-lboi'>$tipo_saida</td>
+                             <td class='tg-lboi'>$descricao</td>
                             <td class='tg-lboi'>$valor Kz</td>
-                            <td class='tg-lboi'>$data_saida </td>
-                            <td class='tg-lboi'>$descricao</td>
-                            <td class='tg-lboi'>$nome_destinatario</td>
+                            <td class='tg-lboi'> $dataS </td>                          
                              <td class='tg-lboi'>$nome_responsavel_saida</td>
                               <td class='tg-lboi'>$nome_autorizou</td>
-                            <td class='tg-lboi'>$id_estado_saida</td>
-                   
-     
-                     
-                           
-                            
+                                                   
                                <td class='text-center'>
                                         <div class='dropdown show'>
                                             <a class='btn btn-success dropdown-toggle' href='#' role='button' id='dropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -165,32 +139,104 @@
                                             <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
                                                 <a class='dropdown-item' href='<?php echo URLADM . 'ControleMilitar/visualizarMilitar/' . $id;'>Mais detalhes</a>
                                                 <a class='dropdown-item' href=' URLADM . 'controleEscalaServico/alterData/' . $id;'>Adicionar Estoque</a>
-                                               
-                                               
-
+                                    
                                             </div>
-
-
                                         </div>
                                     </td>
-
-
-
-
-                         </tr>";
-
-                         
+                         </tr>";         
                     $i++;
                 }
             else :  
-                echo '<tr><td class="tg-lboi" colspan="15">Não existem produtos em estoque! </td></tr>';  
+                echo '<tr><td class="tg-lboi" colspan="15">Não existem dados para os critérios selecionados! </td></tr>';  
             endif; 
                     ?>
             </tbody>
         </table>
 
     </div>
+    <button class="btn btn-success btn-print">Gerar PDF</button>
 </div> 
+
+
+<div class="imprimir d-none">
+
+            <div class="text-center"><img class="rounded-circle" src="<?php echo URLADM; ?>imagens/nelisa_img.jpeg"
+                    width="70" height="100" style="text-align: center;"></div>
+            <h4 style="text-align: center; padding: 0px; height: 15px;">Nelisa Farma</h4>
+
+
+            <br>
+            
+    <h3 style="text-align: center;"> <?php echo $this->Dados['textoSaida']; ?> </h3>
+        
+        <div class="form-row">
+        
+            <div class="form-group col-md-12">
+           
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>                    
+                            <th > Tipo de Saída </th>
+                            <th>Descrição</th>
+                            <th > Valor Kz</th>
+                            <th >Data</th>       
+                            <th >Responsável</th>
+                            <th >Quem Autorizou</th>
+                          
+              
+                        </tr>
+                    </thead>
+                    <tbody>
+                <?php
+                
+                    if(!empty($this->Dados['listSaida'])):
+                        $i=1;
+                        //  var_dump($this->Dados['listEstoque']);
+                        // $relatorio  = new \App\adms\Models\ModelsPaciente();  
+                        foreach ($this->Dados['listSaida'] as $r)
+                        {        
+                                extract($r);    
+                                $dataS = date('d/m/Y', strtotime($data_saida));                                                  
+                            echo "<tr>
+                                <td class='tg-lboi'>$i</td>
+        
+        
+                                    <td class='tg-lboi'>$tipo_saida</td>
+                                     <td class='tg-lboi'>$descricao</td>
+                                    <td class='tg-lboi'>$valor Kz</td>
+                                    <td class='tg-lboi'> $dataS </td>                          
+                                     <td class='tg-lboi'>$nome_responsavel_saida</td>
+                                      <td class='tg-lboi'>$nome_autorizou</td>
+                                                           
+                                     
+                                 </tr>";         
+                            $i++;
+                        }
+                    else :  
+                        echo '<tr><td class="tg-lboi" colspan="15">Não existem dados para os critérios selecionados! </td></tr>';  
+                    endif; 
+                            ?>
+                    </tbody>
+                </table>
+        
+            </div>
+                </div>
+
+<br><br>
+
+            <p class="text-center mt-4"> Luanda, aos <?php echo date("d/m/Y"); ?> </p>
+
+  
+    <p class="text-center mt-5"> O Responsável
+                    </p>
+    <p class="text-center">___________________________________
+                    </p>
+
+        </div>
+
+
+
 
 
 

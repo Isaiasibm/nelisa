@@ -376,6 +376,25 @@ else{
   
 });
 
+
+$('#tipoListaSaida').on('change', function () {
+  let tipoL = $(this).val();
+  if(tipoL==3){
+  $('#dataInicialDiv').show();
+  $('#dataFinalDiv').show();
+  }
+  else if(tipoL==2){
+    $('#dataInicialDiv').show();
+    $('#dataFinalDiv').hide();
+    
+  }
+  else{
+    $('#dataFinalDiv').hide();
+    $('#dataInicialDiv').hide();
+  }
+})
+
+
         $('.select2').select2({
             placeholder: "Digite, escaneie ou selecione um produto...",
             allowClear: true

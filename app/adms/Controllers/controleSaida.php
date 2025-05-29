@@ -80,11 +80,11 @@ class controleSaida {
     {
    
      $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $listEstoque = new \App\adms\Models\admsSaida();
+        $listarSaidaaa = new \App\adms\Models\admsSaida();
 
     
-       if (!empty($this->Dados['btnListarVenda'])){
-            unset($this->Dados['btnListarVenda']);
+       if (!empty($this->Dados['brtnListarSaida'])){
+            unset($this->Dados['brtnListarSaida']);
             
             $dataIni= date("Y/m/d", strtotime($this->Dados["dataInicial"])). " 00:00:00";
             $dataFim= date("Y/m/d", strtotime($this->Dados["dataFinal"])). " 23:59:59";
@@ -92,34 +92,45 @@ class controleSaida {
            // var_dump($dataIni. " - ".$dataFim);
 
          //Lista gerar por data
-            if($this->Dados['tipoLista']==1 || $this->Dados['tipoLista']==2 ){
-                if ($this->Dados['tipoLista']==1) {
-                    $dataFim= date("Y/m/d", strtotime($this->Dados["dataInicial"])). " 23:59:59";
-
-                } 
-                $this->Dados['listVenda'] = $listVenda->listarVendasRelatGeralData($dataIni,$dataFim);
-            }
         
-            elseif($this->Dados['tipoLista']==3 || $this->Dados['tipoLista']==4){
-                if ($this->Dados['tipoLista']==3) {
-                    $dataFim= date("Y/m/d", strtotime($this->Dados["dataInicial"])). " 23:59:59";
+                if ($this->Dados['tipoListaSaida']==2) {
+                    $dataInicial= date("Y/m/d", strtotime($this->Dados["dataInicial"])). " 00:00:00";
+                    $this->Dados['listSaida']= $listarSaidaaa->lisatarSaidasData($dataInicial);
+                    $this->Dados['textoSaida'] = "Saídas realizadas no dia ".date("d/m/Y", strtotime($this->Dados["dataInicial"]));
+
+                  //  var_dump($this->Dados['listSaida']);
                 } 
-           $usuario= explode(';', $this->Dados["usuario"]); 
-            $this->Dados['listVenda'] = $listVenda->listarVendasRelatUserData($usuario[0],$dataIni,$dataFim);
+       //         $this->Dados['listSaida'] = $listSaida->listarVendasRelatGeralData($dataIni,$dataFim);
+              
+              elseif ($this->Dados['tipoListaSaida']==3) {
+                $dataInicial= date("Y/m/d", strtotime($this->Dados["dataInicial"])). " 00:00:00";
+                $dataFim= date("Y/m/d", strtotime($this->Dados["dataFinal"])). " 23:59:59";
+                $this->Dados['listSaida'] = $listarSaidaaa->lisatarSaidasIntervaloData($dataIni,$dataFim);
+                $this->Dados['textoSaida'] = "Saídas realizadas no período de ".date("d/m/Y", strtotime($this->Dados["dataInicial"])). " à ".date("d/m/Y", strtotime($this->Dados["dataFinal"]));
+    
+            } 
+                else{                  
+
+                    $this->Dados['listSaida'] = $listarSaidaaa->lisatarSaidas();
+                    $this->Dados['textoSaida'] = "Lista geral das saídas realizadas";
+                   // var_dump($this->Dados['listSaida']);
+        
+                    }
+      //      $usuario= explode(';', $this->Dados["usuario"]); 
+    //        $this->Dados['listSaida'] = $listSaida->listarVendasRelatUserData($usuario[0],$dataIni,$dataFim);
 
            // var_dump($dataIni. " - ".$dataFim);
-           // var_dump($this->Dados['listVenda']);
-            }
+           // var_dump($this->Dados['listSaida']);
+            
         }
                  
             else{                  
 
-            $this->Dados['listSaida'] = $listEstoque->lisatarSaidas();
+            $this->Dados['listSaida'] = $listarSaidaaa->lisatarSaidas();
+            $this->Dados['textoSaida'] = "Lista geral das saídas realizadas";
            // var_dump($this->Dados['listSaida']);
 
             }
-
-        
 
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();       

@@ -47,42 +47,51 @@
             <div class="form-row">
 
                 <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Qtdade de Pacotes</label>
-                    <input name="qtdadeDePacotes" type="number" class="form-control" placeholder="Informe a quantidade" min="1">
+                    <label><span class="text-danger">*</span> Qtde de Pacotes</label>
+                    <input name="qtdadeDePacotes" type="number" class="form-control" placeholder="Quantos pacotes" min="1">
                 </div>
                 
 
-                <div class="form-group col-md-3">
-                    <label><span class="text-danger">*</span> Qtdade Itens no Pacote </label>
-                    <input type="number" id="qtNoPac" name="qtNoPac" class="form-control" id="qtNoPac">
+                <div class="form-group col-md-2">
+                    <label><span class="text-danger">*</span> Qtde Itens no Pacote </label>
+                    <input type="number" id="qtNoPac" name="qtNoPac" class="form-control" id="qtNoPac" placeholder="Qtde itens no pacote">
                 </div>
 
-                <div class="form-group col-md-3"> 
-                    <label><span class="text-danger">*</span> Preço Compra do Pacote</label>
-                    <input name="preco_custo" type="text" class="form-control" placeholder="Informe o preço de compra" id="preco_custo_pacote">
+                <div class="form-group col-md-2"> 
+                    <label><span class="text-danger">*</span> Custo do Pacote</label>
+                    <input name="preco_custo" type="text" class="form-control" placeholder="Quanto custou o pacote" id="preco_custo_pacote">
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label><span class="text-danger">*</span> Preço Compra do Item</label>
+                <div class="form-group col-md-2">
+                    <label><span class="text-danger">*</span> Custo do Item</label>
                     <input name="preco_custo" type="text" class="form-control" placeholder="Informe o preço de compra" id="preco_custo_item" required>
                 </div>
-                <div class="form-group col-md-3">
-                    <label><span class="text-danger">*</span> Percentagem Ganho</label>
-                    <input name="percentageem" type="text" class="form-control" placeholder="Informe o preço de compra" id="percentual_ganho" >
+                <div class="form-group col-md-1">
+                    <label><span class="text-danger">*</span> % Ganho</label>
+                    <input name="percentageem" type="text" class="form-control" placeholder="% a ganhar" id="percentual_ganho" >
                 </div>
                 <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span> Preço Venda do Item</label>
-                    <input name="precoVenda" type="text" class="form-control" placeholder="Informe o preço de compra" id="preco_venda_item" required>
+                    <input name="precoVenda" type="text" class="form-control" placeholder="Informe o preço de venda" id="preco_venda_item" required>
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Data de Validade</label>
+                    <label><span class="text-danger">*</span> Lote</label>
+                    <input type="text" id="lote" name="lote" class="form-control" placeholder="Lote">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label><span class="text-danger">*</span> Data Validade</label>
                     <input name="data_validade" type="date" class="form-control">
                 </div>
+                
+
+          
                 <div class="form-group col-md-2">
-                    <label><span class="text-danger">*</span> Data de Compra</label>
+                    <label><span class="text-danger">*</span> Data Compra</label>
                     <input name="data_compra" type="date" class="form-control" required>
                 </div>
+                
 
                 <div class="form-group col-md-2">
                 <label><span class="text-danger">*</span> Fornecedor</label>
@@ -115,12 +124,8 @@
                     ?>
                 </select>
             </div>
-
-            <div class="form-group col-md-1">
-                    <label><span class="text-danger">*</span> Lote</label>
-                    <input type="text" id="lote" name="lote" class="form-control">
                 </div>
-            </div>
+
 
             <input type="submit" class="btn btn-success" name="btnSubmitEstoque" value="Registrar Entrada">
         </form>
