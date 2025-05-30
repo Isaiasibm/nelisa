@@ -57,24 +57,7 @@
 
 <div class="form-row">
 
-                <div class="form-group col-md-3">
-                    <label><span class="text-danger">*</span> Destinatário da saída:</label>
-                    <select name="destinatario_saida" class="form-control">
-                        <option value="">Selecione</option>
-                        <?php
-                        $localizacoes = new \App\adms\Models\helper\AdmsRead();
-                        $localizacoes->ExeRead('tb_pessoa');
-                        foreach ($localizacoes->getResultado() as $loc) {
-                            echo "<option value='{$loc['Cod_Pessoa']}'>{$loc['Nome']}</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label><span class="text-danger">*</span> Digite o destinatário:</label>
-                    <input type="text" name="destinatarioOutro" class="form-control">
-                </div>
-
+            
                 <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span> Responsável pela saída:</label>
                     <select name="responsavel_saida" class="form-control">

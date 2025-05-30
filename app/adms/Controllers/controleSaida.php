@@ -49,7 +49,6 @@ class controleSaida {
             $dadosSaida = array('id_tipo_saida'=>$this->Dados["id_tipo_saida"],
             'valor'=>$this->Dados["valor_saida"],'data_saida'=>$this->Dados["data_saida"], 
             'descricao'=>$this->Dados["descricao_saida"],
-            'id_destinatario'=>$this->Dados["destinatario_saida"],
             'id_responsavel_saida'=>$this->Dados["responsavel_saida"],
             'id_autorizou'=>$this->Dados["quem_autorizou"],
             'id_user'=> (int) $_SESSION['usuario_id'],
