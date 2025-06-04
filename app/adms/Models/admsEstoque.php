@@ -62,8 +62,21 @@ class admsEstoque {
     f.telefone AS telefoneFornecedor,
     tp.descrição AS tipoProduto,
     pv.preco_venda,
-    e.data_compra,
-    e.data_validade
+    -- Subquery para pegar data_compra do lote com validade mais próxima
+    (
+        SELECT e2.data_compra
+        FROM tb_estoque e2
+        WHERE e2.id_produto = p.id_produto
+        ORDER BY e2.data_validade ASC
+        LIMIT 1
+    ) AS data_compra,
+    (
+        SELECT e2.data_validade
+        FROM tb_estoque e2
+        WHERE e2.id_produto = p.id_produto
+        ORDER BY e2.data_validade ASC
+        LIMIT 1
+    ) AS data_validade
 FROM tb_estoque e
 INNER JOIN tb_produtos p ON e.id_produto = p.id_produto 
 INNER JOIN tb_fornecedores f ON e.id_fornecedor = f.id_fornecedor
@@ -71,9 +84,17 @@ INNER JOIN tb_tipo_produto tp ON p.id_tipo_produto = tp.id
 INNER JOIN tb_categorias_produto c ON p.id_categoria = c.id_categoria
 LEFT JOIN tb_precos_venda pv ON p.id_produto = pv.id_produto 
     AND pv.data_fim IS NULL -- Pega o preço de venda mais recente
-GROUP BY p.id_produto, p.bar_code, p.nome_produto, c.id_categoria, f.nome, f.telefone, tp.descrição, pv.preco_venda, e.data_compra
-ORDER BY p.nome_produto;
-");
+GROUP BY 
+    p.id_produto, 
+    p.bar_code, 
+    p.nome_produto, 
+    c.id_categoria, 
+    c.nome, 
+    f.nome, 
+    f.telefone, 
+    tp.descrição, 
+    pv.preco_venda
+ORDER BY p.nome_produto; ");
                   return $listarPacienteUEO->getResultado();
       }
 
