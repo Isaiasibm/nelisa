@@ -110,8 +110,9 @@
             <tbody>
         <?php
         
-            if(!empty($this->Dados['listSaida'])):
+            if(!empty($this->Dados['listSaida'])){
                 $i=1;
+                $totalSaida=0;
                 //  var_dump($this->Dados['listEstoque']);
                 // $relatorio  = new \App\adms\Models\ModelsPaciente();  
                 foreach ($this->Dados['listSaida'] as $r)
@@ -135,7 +136,6 @@
                                                 Acções
                                             </a>
                                          
-
                                             <div class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
                                                 <a class='dropdown-item' href='<?php echo URLADM . 'ControleMilitar/visualizarMilitar/' . $id;'>Mais detalhes</a>
                                                 <a class='dropdown-item' href=' URLADM . 'controleEscalaServico/alterData/' . $id;'>Adicionar Estoque</a>
@@ -144,11 +144,21 @@
                                         </div>
                                     </td>
                          </tr>";         
-                    $i++;
-                }
-            else :  
-                echo '<tr><td class="tg-lboi" colspan="15">Não existem dados para os critérios selecionados! </td></tr>';  
-            endif; 
+             
+                $i++;
+                $totalSaida += $valor;
+
+                } 
+   $tot= number_format($totalSaida, 2, ',', '.'); 
+                    echo "<tr> <td> </td> <th> Total: </th><td> </td><td> </td><td> </td><td> </td> <th style='text-align: right'> $tot Kz </th>
+                     <td> </td>
+                    
+                        </tr>"; 
+
+
+             } else {  
+                echo '<tr><td class="tg-lboi" colspan="8">Não existem dados para os critérios selecionados! </td></tr>';  
+                         }
                     ?>
             </tbody>
         </table>
@@ -190,7 +200,7 @@
                     <tbody>
                 <?php
                 
-                    if(!empty($this->Dados['listSaida'])):
+                    if(!empty($this->Dados['listSaida'])){
                         $i=1;
                         //  var_dump($this->Dados['listEstoque']);
                         // $relatorio  = new \App\adms\Models\ModelsPaciente();  
@@ -212,10 +222,20 @@
                                      
                                  </tr>";         
                             $i++;
-                        }
-                    else :  
-                        echo '<tr><td class="tg-lboi" colspan="15">Não existem dados para os critérios selecionados! </td></tr>';  
-                    endif; 
+                        
+                          $totalSaida += $valor;
+
+                } 
+   $tot= number_format($totalSaida, 2, ',', '.'); 
+                    echo "<tr> <th colspan='2'> Total: </th><td> </td><td> </td><td> </td> <th style='text-align: right' colspan='2'> $tot Kz </th>
+                     
+                    
+                        </tr>"; 
+
+
+             } else { 
+                echo " Não foi pssíver retornar nenhuma informação...";
+             }
                             ?>
                     </tbody>
                 </table>

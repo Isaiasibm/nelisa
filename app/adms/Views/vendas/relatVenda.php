@@ -125,10 +125,11 @@
                                 $i++;
                                 $totalVenda += $subtotal;
                             }
+                             $tot= number_format($totalVenda, 2, ',', '.'); 
                             ?>
                             <tr>
                    <td></td><th >Total vendido</th><td></td><td></td><td></td> 
-                   <th style="text-align: right"><?php echo $totalVenda; ?> Kz </th>    <td></td> 
+                   <th style="text-align: right"><?php echo $tot; ?> Kz </th>    <td></td> 
                     </tr>
                             <?php
                         }                        else {
@@ -188,10 +189,11 @@
 
                                 $i++;
                             }
+                             $tot= number_format($totalVenda, 2, ',', '.'); 
                             ?>
                             <tr>
-                   <td></td><th >Total vendido</th><td></td><td></td><td></td> 
-                   <th style="text-align: right"><?php echo $totalVenda; ?> Kz </th>    
+                   <th colspan="2" >Total vendido</th><td></td><td></td> 
+                   <th style="text-align: right" colspan="2"><?php echo $tot; ?> Kz </th>    
                     </tr>
 
                             <?php
