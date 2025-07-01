@@ -59,7 +59,7 @@ class ControllerRequisicao extends Controller {
 									//Calcular o valor total pago
 									$valorTotalPago = $this->Dados['emDinheiro'] + $this->Dados['multicaixa'] + $this->Dados['transferencia'];
 									//Registar dados na tabela Pagamento venda
-									$pagVenda = array('id_venda'=>$regVenda->getResultado(),'valor_total'=>$this->Dados["totalVenda"], 'valor_pago'=>$valorTotalPago,'troco'=>$this->Dados["troco"],'nif_cliente'=>$this->Dados["nif_cliente"], 'nome_cliente'=>$this->Dados["nome_cliente"],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
+									$pagVenda = array('id_venda'=>$regVenda->getResultado(),'valor_total'=>$this->Dados["totalVenda"], 'valor_pago'=>$valorTotalPago,'troco'=>$this->Dados["troco"],'nif_cliente'=>$this->Dados["nif_cliente"],'nome_cliente'=>$this->Dados["nome_cliente"],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
 
 									$regPagVenda->cadastrarPagamentoVenda($pagVenda);
 										if ($regPagVenda->getResultado() >= 1) { 

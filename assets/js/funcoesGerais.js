@@ -1,7 +1,5 @@
 $(document).ready(function () {
   $(".tabelaPersonalizadaDataTable").DataTable({
-    pageLength: 5, // Mostra 5 registros por página
-    lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Todos"]],
     language: {
       sEmptyTable: "Nenhum registro encontrado",
       sProcessing: "A processar...",
@@ -192,10 +190,8 @@ function atualizarCarrinho() {
 //alert(estoque);
     const troco = totalPago - totalVenda;
     $("#troco").text(troco.toFixed(2));
-    const nif_cliente = $("#nif_cliente").val() || null;
+     const nif_cliente = $("#nif_cliente").val() || null;
     const nome_cliente = $("#nome_cliente").val() || null;
-
-    
     
     $.ajax({
       type: "POST",
@@ -208,8 +204,8 @@ function atualizarCarrinho() {
         transferencia: transferencia, // Payment by transfer
         troco: troco, // Change to give back
         estoque: estoque,
-        nif_cliente: nif_cliente,
-        nome_cliente: nome_cliente,
+      nif_cliente: nif_cliente,
+     nome_cliente: nome_cliente,
         accao: "RealizarVenda", // Action identifier for the backend
       },
       contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -227,6 +223,7 @@ function atualizarCarrinho() {
       total: parseFloat($("#total").text()),
       paid: parseFloat($("#total_pago").text()),
       change: parseFloat($("#troco").text()),
+         
     };
 
     // Popular a fatura
@@ -250,17 +247,16 @@ function atualizarCarrinho() {
     $("#invoice-paid").text(invoiceData.paid.toFixed(2));
     $("#invoice-change").text(invoiceData.change.toFixed(2));
 
-    
-    
+  
+
+
+    $("#invoice-nif").text(nif_cliente ? "NIF do Cliente: " + nif_cliente : "");
+    $("#invoice-nome").text(nome_cliente ? "Nome do Cliente: " + nome_cliente : "");
 
 
 
     // Imprimir fatura
-$("#invoice-nif").text(nif_cliente ? "NIF do Cliente: " + nif_cliente : "");
-$("#invoice-nome").text(nome_cliente ? "Nome do Cliente: " + nome_cliente : "");
-
-
-    
+ 
     const invoiceContent = document.getElementById("thermal-invoice").innerHTML;
     const printWindow = window.open("", "_blank", "width=400,height=400");
     printWindow.document.open();
