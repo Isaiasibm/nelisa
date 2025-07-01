@@ -144,6 +144,14 @@
                         <div id="total_pago" class="form-control bg-light" style="width: 150px;">0.00</div>
                     </div>
                 </div>
+               
+    <label for="nif_cliente" class="mr-2">NIF do Cliente:</label>
+    <input name="nif_cliente" type="text" class="form-control" id="nif_cliente" placeholder="Opcional">
+    <input name="nome_cliente" type="text" class="form-control" id="nome_cliente" placeholder="Opcional">
+
+
+
+
                 <button id="finalizar-compra" class="btn btn-success" style="display: none;">Finalizar Compra</button>
         </div>
 
@@ -164,6 +172,11 @@
         
     </div>
     <hr />
+<p>Detalhes do cliente:</p>
+<p style="text-align: center;" id="invoice-nif"></p>
+<p style="text-align: center;" id="invoice-nome"></p>
+
+
     <div>
         <table style="width: 100%; border-collapse: collapse;">
             <thead>
