@@ -145,9 +145,9 @@
                     </div>
                 </div>
                
-    <label for="nif_cliente" class="mr-2">NIF do Cliente:</label>
-    <input name="nif_cliente" type="text" class="form-control" id="nif_cliente" placeholder="Opcional">
-    <input name="nome_cliente" type="text" class="form-control" id="nome_cliente" placeholder="Opcional">
+    <label for="nif_cliente" class="mr-2">Dados do Cliente:</label>
+    <input name="nif_cliente" type="text" class="form-control" id="nif_cliente" placeholder="Nif do cliente">
+    <input name="nome_cliente" type="text" class="form-control" id="nome_cliente" placeholder="Nome do cliente">
 
 
 
