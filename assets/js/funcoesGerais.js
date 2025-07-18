@@ -1,5 +1,7 @@
 $(document).ready(function () {
   $(".tabelaPersonalizadaDataTable").DataTable({
+    pageLength: 5, //Mostrar apenas 5 registos
+    lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Todos"]],
     language: {
       sEmptyTable: "Nenhum registro encontrado",
       sProcessing: "A processar...",
@@ -57,7 +59,7 @@ $(document).on("click", ".btn-add-cart", function () {
   if (existente) {
     // Verificar se a quantidade atual no carrinho excede o estoque total
     if (existente.quantidade + 1 > estoque) {
-      alert(`Estoque insuficiente para ${nome}. Quantidade disponível: ${estoque}`);
+      alert(`Por favor, contacte a gerência`);
       return;
     }
 
@@ -69,7 +71,7 @@ $(document).on("click", ".btn-add-cart", function () {
   } else {
     // Verificar se há estoque disponível para um novo item
     if (estoque <= 0) {
-      alert(`Estoque insuficiente para ${nome}.`);
+      alert(`Sem permissão para esse produto, por favor, contacte a gerência`);
       return;
     }
 

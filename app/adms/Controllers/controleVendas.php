@@ -52,6 +52,26 @@ class controleVendas extends Controller {
         $carregarView->renderizar();
     }
 
+    
+    public function registarVendaAntendente()
+    {
+       
+    
+    
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $listProdutos = new \App\adms\Models\admsProduto();
+
+
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $this->Dados['listProd'] = $listProdutos->listarProdutos();
+       // var_dump($this->Dados['listProd']);
+
+        //Há uma requisição ajax que realiza o processo via javascript
+       
+        $carregarView = new \Core\ConfigView("adms/Views/vendas/registarVendaAtendente", $this->Dados);
+        $carregarView->renderizar();
+    }
+
     public function relatVendas()
     {
    
