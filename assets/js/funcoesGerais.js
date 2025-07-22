@@ -94,58 +94,108 @@ function atualizarCarrinho() {
   const tabelaCarrinho = $("#carrinho tbody");
   tabelaCarrinho.empty();
 
-  let total = 0; // Reinicia o total ao recalcular
+  let total = 0;
 
-  // Recria as linhas da tabela e soma os subtotais
   carrinhoData.forEach((item, index) => {
-    total += item.subtotal; // Soma o subtotal de cada item
+    total += item.subtotal;
 
     tabelaCarrinho.append(`
       <tr>
-          <td>${item.nome}</td>
-          <td>${item.quantidade}</td>
-          <td>${item.preco.toFixed(2)}</td>
-          <td>${item.subtotal.toFixed(2)}</td>
-          <td>
-            <button class="btn btn-danger btn-remove" data-index="${index}">Remover</button>
-          </td>
+        <td>${item.nome}</td>
+       <td>
+  <div class="d-flex align-items-center justify-content-center gap-1">
+    <button class="btn btn-outline-danger btn-sm rounded-circle btn-minus" 
+            data-index="${index}" title="Diminuir">
+      <i class="fas fa-minus"></i>
+    </button>
+    <input type="number" min="1" max="${item.estoque + item.quantidade}" 
+           value="${item.quantidade}" 
+           class="form-control form-control-sm text-center mx-1 input-quantidade" 
+           data-index="${index}" style="width: 60px;" />
+    <button class="btn btn-outline-success btn-sm rounded-circle btn-plus" 
+            data-index="${index}" title="Aumentar">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+</td>
+
+        <td>${item.preco.toFixed(2)}</td>
+        <td>${item.subtotal.toFixed(2)}</td>
+       
       </tr>
     `);
   });
 
-  $("#total").text(total.toFixed(2)); // Atualiza o valor total na interface
-  
-  $("#total2").text(total.toFixed(2)); //Atualiza o total na div do checkout
+  $("#total").text(total.toFixed(2));
+  $("#total2").text(total.toFixed(2));
 
-  // Configura o evento de remoção do item
- $(".btn-remove").click(function () {
-  const index = $(this).data("index");
-  const item = carrinhoData[index];
-
-  if (item.quantidade > 1) {
-    // Decrementa a quantidade e recalcula o subtotal
-    item.quantidade--;
-    item.subtotal = item.quantidade * item.preco;
-
-    // Incrementa o estoque do produto
-    item.estoque++;
-
+  if (carrinhoData.length > 0) {
+    $("#carrinhoDiv").show();
   } else {
-    // Se a quantidade é 1, remove o item
-    carrinhoData.splice(index, 1);
-  }
-
-  atualizarCarrinho(); // Atualiza o carrinho novamente
-
-  // Esconde o carrinho se não houver itens
-  if (carrinhoData.length === 0) {
     $("#carrinhoDiv").hide();
   }
-});
-//Fim de remover itens
 
-  $("#carrinhoDiv").show();
+  $(".input-quantidade").off().on("change", function () {
+    const index = $(this).data("index");
+    let novaQuantidade = parseInt($(this).val());
+
+    if (isNaN(novaQuantidade) || novaQuantidade <= 0) {
+      $(this).val(carrinhoData[index].quantidade);
+      return;
+    }
+
+    const item = carrinhoData[index];
+    const maxPermitido = item.estoque + item.quantidade;
+
+    if (novaQuantidade > maxPermitido) {
+      alert(`Estoque insuficiente. Máximo permitido: ${maxPermitido}`);
+      $(this).val(item.quantidade);
+      return;
+    }
+
+    item.estoque = maxPermitido - novaQuantidade;
+    item.quantidade = novaQuantidade;
+    item.subtotal = novaQuantidade * item.preco;
+
+    atualizarCarrinho();
+  });
+
+  $(".btn-plus").click(function () {
+    const index = $(this).data("index");
+    const item = carrinhoData[index];
+    const maxPermitido = item.estoque + item.quantidade;
+
+    if (item.quantidade + 1 > maxPermitido) {
+      alert(`Estoque insuficiente. Máximo permitido: ${maxPermitido}`);
+      return;
+    }
+
+    item.quantidade++;
+    item.estoque = maxPermitido - item.quantidade;
+    item.subtotal = item.quantidade * item.preco;
+
+    atualizarCarrinho();
+  });
+
+  $(".btn-minus").click(function () {
+    const index = $(this).data("index");
+    const item = carrinhoData[index];
+    const maxPermitido = item.estoque + item.quantidade;
+
+    if (item.quantidade > 1) {
+      item.quantidade--;
+      item.estoque = maxPermitido - item.quantidade;
+      item.subtotal = item.quantidade * item.preco;
+    } else {
+      carrinhoData.splice(index, 1);
+    }
+
+    atualizarCarrinho();
+  });
+
+  calcularTroco();
 }
+
 
 
   //Checkout booton
@@ -216,6 +266,8 @@ function atualizarCarrinho() {
 
       success: function (response) {
         if (response.success) {
+          $("#invoice-number").text(response.numero_fatura);
+
           alert("Venda realizada com sucesso");
 
              //Imprimir fatura

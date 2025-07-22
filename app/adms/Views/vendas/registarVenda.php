@@ -101,11 +101,11 @@
             <table id="carrinho" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Produto</th>
-                        <th>Qt</th>
-                        <th>Preço</th>
-                        <th>Subtotal</th>
-                        <th>Ação</th>
+                        <th style="text-align: center;">Produto</th>
+                        <th style="text-align: center;">Qt</th>
+                        <th style="text-align: center;">Preço</th>
+                        <th style="text-align: center;"> Subtotal</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -164,7 +164,9 @@
     <div style="text-align: center;">
         <h2>Nelisa Farma</h2>
         <p style="font-size: 6px">NIF: 5484036305, tel. 923 600 263</p>
-        <p>Recibo de Compras</p>
+       
+        <p style="text-align: center;">FATURA Nº <span id="invoice-number"></span></p>
+
         
         
     </div>

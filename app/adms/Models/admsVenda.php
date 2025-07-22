@@ -291,5 +291,26 @@ ORDER BY
         }
 
 
+    public function contarVendasDoDia($data) {
+    $contarVendas = new \App\adms\Models\helper\AdmsRead();
+
+    $contarVendas->fullRead(
+        "SELECT COUNT(*) AS total 
+         FROM venda 
+         WHERE DATE(data_venda) = :data", 
+        "data={$data}"
+    );
+
+    if ($contarVendas->getResultado()) {
+        $row = $contarVendas->getResultado()[0];
+        return (int)$row['total'] + 1; // Soma 1 para a venda atual
+    }
+
+    return 1; // Se não houver nenhuma venda ainda neste dia
+}
+
+
+
+
 
 }

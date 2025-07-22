@@ -25,14 +25,22 @@ class ControllerRequisicao extends Controller {
 			if (!empty($carrinho)) {
 		//$valorVendido= (double)$this->Dados['totalVenda'];
 			
-
+//Array das vendas
 
 				$DadosVenda =  array('total'=>$this->Dados['totalVenda'],'id_usuario'=> (int) $_SESSION['usuario_id'],'data_venda'=>date('Y-m-d H:m:s'));
-				
+				//Registo de venda
 				$regVenda->cadastrarVenda($DadosVenda);
 
 					if ($regVenda->getResultado() >= 1) { 
-							
+						$idVenda = $regVenda->getResultado(); // ID da venda
+$dataHoje = date('Y-m-d');
+
+// Conta o número de vendas já feitas no mesmo dia
+$totalHoje = $regVenda->contarVendasDoDia($dataHoje);
+
+// Cria número da fatura
+$numeroFatura = 'FAT-' . str_pad($idVenda, 4, '0', STR_PAD_LEFT) . '-' . str_pad($totalHoje, 4, '0', STR_PAD_LEFT);
+	
 							
 							// Carregar os itens do carrinho...
 						foreach ($carrinho as $item) {
@@ -82,6 +90,7 @@ class ControllerRequisicao extends Controller {
 											
 											$this->result = [
 												'success' => true,
+												'numero_fatura' => $numeroFatura,
 												'message' => 'Venda realizada com sucesso Ok OK',
 											];
 										
