@@ -27,7 +27,7 @@ class ControllerRequisicao extends Controller {
 			
 //Array das vendas
 
-				$DadosVenda =  array('total'=>$this->Dados['totalVenda'],'id_usuario'=> (int) $_SESSION['usuario_id'],'data_venda'=>date('Y-m-d H:m:s'));
+				$DadosVenda =  array('total'=>$this->Dados['totalVenda'],'id_usuario'=> (int) $_SESSION['usuario_id'],'data_venda'=>date('Y-m-d H:i:s'));
 				//Registo de venda
 				$regVenda->cadastrarVenda($DadosVenda);
 
