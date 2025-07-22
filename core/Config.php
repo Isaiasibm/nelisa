@@ -3,6 +3,7 @@ session_start();
 ob_start();
 //10.0.3.24
 //192.168.0.101
+date_default_timezone_set('Africa/Luanda');
 
 
 
