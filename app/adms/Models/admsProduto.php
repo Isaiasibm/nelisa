@@ -76,6 +76,8 @@ class admsProduto {
     p.id_produto,
     p.bar_code, 
     p.nome_produto, 
+
+    -- Último preço de venda do produto
     (
         SELECT e1.preco_venda 
         FROM tb_estoque e1 
@@ -83,20 +85,39 @@ class admsProduto {
         ORDER BY e1.created_at DESC 
         LIMIT 1
     ) AS preco_venda,
-    COALESCE(SUM(e.quantidade_disponivel), 0) AS quantidade_estoque,
-    MIN(e.data_validade) AS data_validade,
+
+    -- Estoque da localização 2 + registros antigos sem localização
+    COALESCE(SUM(
+        CASE 
+            WHEN e.id_localizacao = 2 OR e.id_localizacao IS NULL OR e.id_localizacao = 0 or e.id_localizacao = 1
+            THEN e.quantidade_disponivel 
+            ELSE 0 
+        END
+    ), 0) AS quantidade_estoque,
+
+    -- Validade da localização 2 + registros antigos sem localização
+    MIN(
+        CASE 
+            WHEN e.id_localizacao = 2 OR e.id_localizacao IS NULL OR e.id_localizacao = 0 OR e.id_localizacao = 1
+            THEN e.data_validade 
+        END
+    ) AS data_validade,
+
     f.nome_fabricante, 
     tp.descrição AS tipoProduto
+
 FROM tb_produtos p
 LEFT JOIN tb_fabricante f ON p.id_fabricante = f.id
 LEFT JOIN tb_tipo_produto tp ON p.id_tipo_produto = tp.id
 LEFT JOIN tb_estoque e ON p.id_produto = e.id_produto
+
 GROUP BY 
     p.id_produto, 
     p.bar_code, 
     p.nome_produto, 
     f.nome_fabricante, 
     tp.descrição
+
 ORDER BY p.nome_produto ASC, data_validade ASC; ");
                     return $listProdutos->getResultado();
         }
@@ -114,7 +135,7 @@ ORDER BY p.nome_produto ASC, data_validade ASC; ");
             }
         }  
 
-     
+  
 
       public function registarUsuario(array $DadosUser) {
 

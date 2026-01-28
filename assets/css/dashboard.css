@@ -11,6 +11,55 @@ body {
     min-height: calc(100vh - 56px);
     transition: all 0.3s;
 }
+
+.sidebar.toggled{
+    margin-left: -250px;
+}
+
+
+
+/* Mobile: transformar sidebar em off-canvas e usar .toggled para abrir */
+@media (max-width: 768px){
+    .sidebar{
+        position: fixed;
+        top: 56px; /* ajustar se a navbar tiver outra altura */
+        left: -250px;
+        width: 250px;
+        height: calc(100% - 56px);
+        margin-left: 0; /* remover margem-left usada anteriormente */
+        z-index: 1050;
+        transition: left .3s ease;
+    }
+    /* quando toggled -> sidebar visível no mobile */
+    .sidebar.toggled{
+        left: 0;
+    }
+
+    /* overlay que aparece quando o menu está aberto no mobile */
+    #menuOverlay{
+        display: none;
+        position: fixed;
+        top: 56px; /* mesmo top do sidebar */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 1040;
+    }
+    #menuOverlay.show{
+        display: block;
+    }
+
+    /* impedir scroll do body quando menu aberto */
+    body.menu-open{
+        overflow: hidden;
+    }
+}
+
+
+
+
+
 .sidebar ul li a{
     display: block;
     padding: 0.75rem 1rem;
@@ -26,9 +75,7 @@ body {
     background-color: #1e2835;
 }
 /*Seletor utilizado para ativar o botão ocultar menu em PC*/ 
-.sidebar.toggled{
-    margin-left: -250px;
-}
+
 
 @media (max-width: 768px){
     .sidebar{
@@ -61,3 +108,4 @@ body {
 .titulo{
     font-size: 2.0rem !important;
 }
+ 

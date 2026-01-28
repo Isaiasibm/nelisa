@@ -199,7 +199,7 @@
                     </thead>
                     <tbody>
                 <?php
-                
+                $totalSaida = 0;
                     if(!empty($this->Dados['listSaida'])){
                         $i=1;
                         //  var_dump($this->Dados['listEstoque']);

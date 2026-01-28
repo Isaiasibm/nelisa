@@ -238,7 +238,7 @@ ORDER BY
               $queryEstoque = new \App\adms\Models\helper\AdmsRead();
               $queryEstoque->exeRead(
                   "tb_estoque",
-                  "WHERE id_produto = :id AND quantidade_disponivel > 0 ORDER BY data_validade ASC",
+                  "WHERE id_produto = :id AND quantidade_disponivel > 0 AND (id_localizacao = 2 OR id_localizacao IS NULL OR id_localizacao = 0) ORDER BY data_validade ASC",
                   "id={$idProduto}"
               );
               
