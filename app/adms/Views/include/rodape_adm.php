@@ -1,9 +1,10 @@
 <?php
-if (!defined('URL')) {
+    if (! defined('URL')) {
     header("Location: /");
     exit();
-}
+    }
 ?>
+    </div>
 </div>
 
 <!-- jQuery - Certifique-se de que apenas uma versão está sendo carregada -->
@@ -35,3 +36,4 @@ if (!defined('URL')) {
 <script src="<?php echo URLADM . 'assets/js/dashboard.js'; ?>"></script>
 
 </body>
+</html>

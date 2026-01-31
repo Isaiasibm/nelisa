@@ -29,7 +29,7 @@
             ?>
 
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3 justify-content-center">
             <div class="col-12 col-sm-6 col-lg-3 mb-3 mb-lg-0">
                 <div class="card bg-success text-white">
                     <div class="card-body">
