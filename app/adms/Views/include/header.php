@@ -5,7 +5,7 @@
     }
 ?>
 <nav class="navbar navbar-expand navbar-dark bg-primary" style="">
-    <a class="sidebar-toggle text-light mr-3">
+    <a href="#" class="sidebar-toggle text-light mr-3">
         <span class="navbar-toggler-icon"></span>
     </a>
          <img class="rounded-circle" src="<?php echo URLADM; ?>imagens/nelisa_img.jpeg" width="40" height="40">&nbsp;
