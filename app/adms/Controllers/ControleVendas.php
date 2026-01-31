@@ -10,11 +10,11 @@ if (!defined('URL')) {
 }
  
 /**
- * Controller VeEstoquendas
+ * Controller Vendas
  *
  * @copyright (c) 2025, Nelisa Farma
  */
-class controllerEstoque {
+class ControleVendas extends Controller {
 
     private $Resultado;
     private $Dados;
@@ -33,13 +33,50 @@ class controllerEstoque {
         return $this->Resultado;
     }
 
+    public function registarVenda()
+    {
+       
+    
+    
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $listProdutos = new \App\adms\Models\admsProduto();
 
 
-    public function listarEstoque()
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $this->Dados['listProd'] = $listProdutos->listarProdutos();
+       // var_dump($this->Dados['listProd']);
+
+        //Há uma requisição ajax que realiza o processo via javascript
+       
+        $carregarView = new \Core\ConfigView("adms/Views/vendas/registarVenda", $this->Dados);
+        $carregarView->renderizar();
+    }
+
+    
+    public function registarVendaAntendente()
+    {
+       
+    
+    
+        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $listProdutos = new \App\adms\Models\admsProduto();
+
+
+        $this->Dados['menu'] = $listarMenu->itemMenu();
+        $this->Dados['listProd'] = $listProdutos->listarProdutos();
+       // var_dump($this->Dados['listProd']);
+
+        //Há uma requisição ajax que realiza o processo via javascript
+       
+        $carregarView = new \Core\ConfigView("adms/Views/vendas/registarVendaAtendente", $this->Dados);
+        $carregarView->renderizar();
+    }
+
+    public function relatVendas()
     {
    
      $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        $listEstoque = new \App\adms\Models\admsEstoque();
+        $listVenda = new \App\adms\Models\admsVenda();
 
     
        if (!empty($this->Dados['btnListarVenda'])){
@@ -73,7 +110,7 @@ class controllerEstoque {
                  
             else{                  
 
-            $this->Dados['listEstoque'] = $listEstoque->listarEstoqueGeral();
+            $this->Dados['listVenda'] = $listVenda->listarVendasRelatGeral();
         //    var_dump($this->Dados['listVenda']);
 
             }
@@ -82,7 +119,7 @@ class controllerEstoque {
 
         $listarMenu = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();       
-        $carregarView = new \Core\ConfigView("adms/Views/estoque/listarEstoque", $this->Dados);
+        $carregarView = new \Core\ConfigView("adms/Views/vendas/relatVenda", $this->Dados);
         $carregarView->renderizar();
     }
 
