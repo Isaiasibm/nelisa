@@ -31,6 +31,7 @@ if (!defined('URL')) {
 <!-- Arquivo de Funções Gerais -->
 <script src="<?php echo URLADM . 'assets/js/funcoesGerais.js'; ?>"></script>
 
-
+<!-- Dashboard - Menu Toggle -->
+<script src="<?php echo URLADM . 'assets/js/dashboard.js'; ?>"></script>
 
 </body>

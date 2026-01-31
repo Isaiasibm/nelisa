@@ -108,4 +108,17 @@ body {
 .titulo{
     font-size: 2.0rem !important;
 }
- 
+
+/* Responsividade para telas pequenas */
+@media (max-width: 576px){
+    .titulo{
+        font-size: 1.2rem !important;
+    }
+    .sidebar{
+        min-width: 200px;
+        max-width: 200px;
+    }
+    .navbar-brand{
+        font-size: 0.9rem;
+    }
+}
