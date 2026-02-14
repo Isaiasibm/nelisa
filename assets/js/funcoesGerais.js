@@ -247,7 +247,7 @@ function atualizarCarrinho() {
     
     $.ajax({
       type: "POST",
-      url: "../ControllerRequisicao/ReciveRequest",
+      url: window.BASE_URL + "controller-requisicao/recive-request",
       data: {
         carrinho: JSON.stringify(carrinhoData),
         totalVenda: totalVenda,

@@ -7,8 +7,8 @@ date_default_timezone_set('Africa/Luanda');
 
 
 
-define('URL', 'http://192.168.0.124/nelisa/');
-define('URLADM', 'http://192.168.0.124/nelisa/');
+define('URL', 'http://localhost/nelisa/');
+define('URLADM', 'http://localhost/nelisa/');
 
 define('CONTROLER', 'Home');
 define('METODO', 'index');
