@@ -1,20 +1,6 @@
 
 $(document).ready(function () {
-    //Apresentar ou ocultar o menu
-    $('.sidebar-toggle').on('click', function () {
-        $('.sidebar').toggleClass('toggled');
-    });
 
-    //carregar aberto o submenu
-    var active = $('.sidebar .active');
-    if (active.length && active.parent('.collapse').length) {
-        var parent = active.parent('.collapse');
-
-        parent.prev('a').attr('aria-expanded', true);
-        parent.addClass('show');
-    }
-
-    // ---- nova lógica para overlay e comportamento responsivo ----
     var $sidebar = $('.sidebar');
     var $body = $('body');
 
@@ -22,54 +8,62 @@ $(document).ready(function () {
         return $(window).width() <= 768;
     }
 
-    function getOverlay() {
+    function ensureOverlay() {
         var $ov = $('#menuOverlay');
         if (!$ov.length) {
             $ov = $('<div id="menuOverlay"></div>');
-            $('body').append($ov);
+            $body.append($ov);
+
             $ov.on('click', function () {
-                $sidebar.removeClass('toggled');
-                $ov.removeClass('show');
-                $body.removeClass('menu-open');
+                closeMenu();
             });
         }
         return $ov;
     }
 
+    function openMenu() {
+        $sidebar.addClass('toggled');
+        if (isMobile()) {
+            ensureOverlay().addClass('show');
+            $body.addClass('menu-open');
+        }
+    }
+
+    function closeMenu() {
+        $sidebar.removeClass('toggled');
+        var $ov = $('#menuOverlay');
+        if ($ov.length) $ov.removeClass('show');
+        $body.removeClass('menu-open');
+    }
+
+    function toggleMenu() {
+        if ($sidebar.hasClass('toggled')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    // ✅ ÚNICO handler do botão do menu
     $('.sidebar-toggle').on('click', function (e) {
         e.preventDefault();
-        $sidebar.toggleClass('toggled');
-
-        if (isMobile()) {
-            var $ov = getOverlay();
-            if ($sidebar.hasClass('toggled')) {
-                $ov.addClass('show');
-                $body.addClass('menu-open');
-            } else {
-                $ov.removeClass('show');
-                $body.removeClass('menu-open');
-            }
-        }
+        toggleMenu();
     });
 
-    // ajustar ao redimensionar
+    // manter submenu ativo aberto
+    var active = $('.sidebar .active');
+    if (active.length && active.parent('.collapse').length) {
+        var parent = active.parent('.collapse');
+        parent.prev('a').attr('aria-expanded', true);
+        parent.addClass('show');
+    }
+
+    // Ajustar ao redimensionar (estado consistente)
     $(window).on('resize', function () {
-        var $ov = $('#menuOverlay');
-        if (!isMobile()) {
-            // Ao ir para desktop removemos o overlay e mostramos o sidebar (comportamento desktop: .toggled => oculto)
-            if ($ov.length) $ov.removeClass('show');
-            $body.removeClass('menu-open');
-            // garantir estado consistente: no desktop queremos sidebar visível por defeito
-            $sidebar.removeClass('toggled');
-        } else {
-            // em mobile garantir sidebar fechado por defeito
-            if ($ov.length) $ov.removeClass('show');
-            $body.removeClass('menu-open');
-            $sidebar.removeClass('toggled');
-        }
+        closeMenu(); // fecha sempre ao mudar de tamanho
     });
-    // ---- fim nova lógica ----
 });
+
 
 
 function previewImagem() {

@@ -1,0 +1,471 @@
+[29-Jan-2026 14:54:14 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsConn.php:30
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsConn.php(30): PDO->__construct()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsConn.php(41): App\adms\Models\helper\AdmsConn::conectar()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(64): App\adms\Models\helper\AdmsConn->getConn()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(52): App\adms\Models\helper\AdmsRead->conexao()
+#4 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#5 /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsPaginas.php(36): App\adms\Models\helper\AdmsRead->fullRead()
+#6 /mnt/home7/nelisaao/public_html/core/ConfigController.php(88): App\adms\Models\AdmsPaginas->listarPaginas()
+#7 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#8 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsConn.php on line 30
+[29-Jan-2026 19:24:12 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 19:24:12 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 19:24:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 19:24:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 19:55:55 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 19:55:55 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 20:17:38 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 20:17:38 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 20:25:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 20:25:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 20:48:04 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsEditarUsuario.php(117): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/EditarUsuario.php(60): App\adms\Models\AdmsEditarUsuario->listarCadastrar()
+#4 /mnt/home7/nelisaao/public_html/app/adms/Controllers/EditarUsuario.php(52): App\adms\Controllers\EditarUsuario->editUsuarioViewPriv()
+#5 /mnt/home7/nelisaao/public_html/app/adms/Controllers/EditarUsuario.php(26): App\adms\Controllers\EditarUsuario->editUsuarioPriv()
+#6 /mnt/home7/nelisaao/public_html/core/ConfigController.php(111): App\adms\Controllers\EditarUsuario->editUsuario()
+#7 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#8 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#9 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[29-Jan-2026 21:56:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 21:56:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 21:57:32 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 21:57:32 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[29-Jan-2026 22:03:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[29-Jan-2026 22:03:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[30-Jan-2026 18:55:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[30-Jan-2026 18:55:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[30-Jan-2026 18:58:29 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 18:58:29 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 18:58:48 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 18:58:54 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 18:58:54 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 19:06:59 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 19:06:59 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[30-Jan-2026 19:11:23 Africa/Luanda] PHP Fatal error:  Uncaught Error: Class "App\adms\Models\AdmsListarProduto" not found in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleProduto.php:199
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleProduto->listarProduto()
+#1 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#2 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#3 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleProduto.php on line 199
+[30-Jan-2026 19:14:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[30-Jan-2026 19:14:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[30-Jan-2026 22:08:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[30-Jan-2026 22:08:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 17:54:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 17:54:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:22:27 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:22:27 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:22:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:22:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:23:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:23:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:24:47 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:24:47 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:25:18 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 96
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Undefined variable $valorForm in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:26:05 Africa/Luanda] PHP Warning:  Trying to access array offset on value of type null in /mnt/home7/nelisaao/public_html/app/adms/Views/usuario/cadUsuario.php on line 122
+[31-Jan-2026 20:27:03 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:27:03 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:27:18 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:27:18 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:34:03 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:34:03 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:41:26 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_item_venda' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:41:29 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_item_venda' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:41:31 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_item_venda' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:41:32 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_item_venda' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:41:33 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_item_venda' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:45:21 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_produtos' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:45:23 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_produtos' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:45:24 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_produtos' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:45:25 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.tb_produtos' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/admsVenda.php(143): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleVendas.php(113): App\adms\Models\admsVenda->listarVendasRelatGeral()
+#4 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleVendas->relatVendas()
+#5 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#6 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#7 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[31-Jan-2026 20:46:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:46:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:50:36 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:50:36 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:51:01 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:51:01 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:51:21 Africa/Luanda] PHP Fatal error:  Uncaught Error: Class "App\adms\Models\AdmsListarProduto" not found in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleProduto.php:199
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/core/ConfigController.php(113): App\adms\Controllers\ControleProduto->listarProduto()
+#1 /mnt/home7/nelisaao/public_html/core/ConfigController.php(93): Core\ConfigController->carregarMetodo()
+#2 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#3 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleProduto.php on line 199
+[31-Jan-2026 20:56:41 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[31-Jan-2026 20:56:41 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[31-Jan-2026 20:59:02 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[31-Jan-2026 20:59:02 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 07:01:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 07:01:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 07:01:36 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 07:01:36 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 07:16:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 07:16:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 09:21:25 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 09:21:25 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 09:21:42 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 09:21:42 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 10:34:28 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 10:34:28 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 10:34:36 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 10:34:36 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 10:38:47 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 10:38:47 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 10:38:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 10:38:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 14:51:56 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 14:51:56 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 14:52:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 14:52:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 15:00:55 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 15:00:55 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 15:01:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 15:01:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 15:18:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 15:18:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 17:03:41 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 17:03:41 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 17:17:53 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[02-Feb-2026 17:18:16 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 17:18:16 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[02-Feb-2026 17:19:10 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 17:19:10 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 17:19:17 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[02-Feb-2026 17:39:20 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[02-Feb-2026 17:39:20 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[03-Feb-2026 10:43:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[03-Feb-2026 10:43:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[03-Feb-2026 13:25:32 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[03-Feb-2026 13:25:32 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[04-Feb-2026 06:05:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[04-Feb-2026 06:05:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[04-Feb-2026 06:06:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[04-Feb-2026 06:06:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[05-Feb-2026 09:10:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[05-Feb-2026 09:10:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[05-Feb-2026 09:11:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[05-Feb-2026 09:11:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[07-Feb-2026 10:55:00 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[07-Feb-2026 10:55:00 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[07-Feb-2026 10:55:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[07-Feb-2026 10:55:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[08-Feb-2026 17:45:14 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[08-Feb-2026 17:45:14 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[08-Feb-2026 17:45:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[08-Feb-2026 17:45:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[08-Feb-2026 17:45:42 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[08-Feb-2026 17:45:42 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[08-Feb-2026 17:46:17 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[11-Feb-2026 11:43:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[11-Feb-2026 11:43:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[11-Feb-2026 11:44:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[11-Feb-2026 11:44:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[11-Feb-2026 17:54:52 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[11-Feb-2026 17:54:52 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 08:55:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 08:55:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 08:56:17 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 08:56:17 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:12:43 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:12:43 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:12:59 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:13:17 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 09:13:17 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 09:14:28 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:14:28 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:14:44 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:15:00 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:15:00 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:15:00 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:15:01 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:15:06 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:23:28 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:23:28 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 09:23:36 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 11:47:49 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.adms_paginas' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsPaginas.php(36): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/core/ConfigController.php(88): App\adms\Models\AdmsPaginas->listarPaginas()
+#4 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#5 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[12-Feb-2026 11:47:49 Africa/Luanda] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nelisaao_nelisa.adms_paginas' doesn't exist in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php:55
+Stack trace:
+#0 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(55): PDOStatement->execute()
+#1 /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php(47): App\adms\Models\helper\AdmsRead->exeInstrucao()
+#2 /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsPaginas.php(36): App\adms\Models\helper\AdmsRead->fullRead()
+#3 /mnt/home7/nelisaao/public_html/core/ConfigController.php(88): App\adms\Models\AdmsPaginas->listarPaginas()
+#4 /mnt/home7/nelisaao/public_html/index.php(9): Core\ConfigController->carregar()
+#5 {main}
+  thrown in /mnt/home7/nelisaao/public_html/app/adms/Models/helper/AdmsRead.php on line 55
+[12-Feb-2026 12:07:46 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 12:07:46 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 12:07:52 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:07:52 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:07:57 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:07:57 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:10:22 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:10:22 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:10:35 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:11:23 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:11:23 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:25:17 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:25:17 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:30:40 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:30:40 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 12:35:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 12:35:09 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 14:03:26 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 14:03:26 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 15:23:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 15:23:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 15:23:53 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[12-Feb-2026 15:23:53 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[12-Feb-2026 15:23:53 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[12-Feb-2026 15:24:05 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 15:24:05 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 15:27:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 15:27:49 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:01:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:01:23 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:01:27 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:01:27 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:05:17 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:05:17 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:06:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:06:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:06:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:06:58 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:07:29 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 16:07:29 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 16:09:35 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 16:09:35 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 16:12:39 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 16:12:39 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 17:25:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 17:25:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 17:25:40 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 17:25:40 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 17:25:53 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 17:25:53 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 18:07:40 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 18:07:40 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 18:07:48 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 18:07:48 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 18:09:52 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 18:09:52 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 18:10:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 18:10:08 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 22:33:10 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[12-Feb-2026 22:33:10 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[12-Feb-2026 22:36:46 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[12-Feb-2026 22:36:46 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 06:32:11 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 06:32:11 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 07:11:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 07:11:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 08:07:24 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 08:07:24 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 09:40:33 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 09:40:33 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 09:40:42 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 09:40:42 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 09:40:53 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 09:40:53 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 09:41:56 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 09:41:56 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 10:15:57 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 10:15:57 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 10:36:31 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 10:36:31 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 10:36:38 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 10:36:38 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 10:41:51 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 10:41:51 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 10:53:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 10:53:59 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 12:04:25 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 12:04:25 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 12:17:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 12:17:57 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 12:18:01 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 12:18:01 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 12:27:20 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 12:27:20 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 13:23:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 13:23:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 15:00:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 15:00:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 16:20:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 16:20:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 16:21:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 16:21:05 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 17:19:21 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 17:19:21 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 17:32:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 17:32:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 18:05:24 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[13-Feb-2026 18:06:15 Africa/Luanda] PHP Warning:  Undefined array key "usuario_id" in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleSaida.php on line 54
+[13-Feb-2026 18:06:15 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[13-Feb-2026 18:07:10 Africa/Luanda] PHP Warning:  Undefined array key "usuario_id" in /mnt/home7/nelisaao/public_html/app/adms/Controllers/ControleSaida.php on line 54
+[13-Feb-2026 18:07:10 Africa/Luanda] PHP Warning:  Undefined array key "usuario_nome" in /mnt/home7/nelisaao/public_html/app/adms/Views/include/header.php on line 27
+[13-Feb-2026 18:07:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 18:07:37 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 18:08:37 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 18:08:37 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[13-Feb-2026 21:00:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 21:00:34 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[13-Feb-2026 23:08:46 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[13-Feb-2026 23:08:46 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 07:03:21 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 07:03:21 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 07:32:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 07:32:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 08:37:44 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 08:37:44 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 10:08:44 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 10:08:44 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 11:26:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 11:26:04 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 12:51:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 12:51:15 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 14:50:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 14:50:19 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 15:15:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 15:15:02 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 15:15:08 Africa/Luanda] PHP Warning:  Undefined variable $nome_user in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[14-Feb-2026 15:15:08 Africa/Luanda] PHP Warning:  Undefined array key "dataInicial" in /mnt/home7/nelisaao/public_html/app/adms/Views/vendas/relatVenda.php on line 155
+[14-Feb-2026 16:12:24 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 16:12:24 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65
+[14-Feb-2026 17:31:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 64
+[14-Feb-2026 17:31:18 Africa/Luanda] PHP Warning:  Undefined array key "id_Provincia" in /mnt/home7/nelisaao/public_html/app/adms/Models/AdmsLogin.php on line 65

@@ -14,7 +14,7 @@ if (!defined('URL')) {
  *
  * @copyright (c) 2025, Nelisa Moisés, Lda
  */
-class controleRelatorioVendas {
+class ControleRelatorioVendas {
 
     private $Resultado;
     private $Dados;
@@ -32,7 +32,7 @@ class controleRelatorioVendas {
         return $this->Resultado;
     }
 
-public function relatorioVenda() {
+public function RelatorioVenda() {
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         $listPac = new \App\adms\Models\admsRelatorio();

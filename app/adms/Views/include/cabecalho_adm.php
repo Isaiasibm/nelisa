@@ -4,6 +4,9 @@ if (!defined('URL')) {
     exit();
 }
 ?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">        
@@ -26,6 +29,13 @@ if (!defined('URL')) {
     <!-- Select2 - Adicionando Importação Global -->
 
     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/select2.min.css'; ?>">
+
+    
+    <script>
+        //Variável para ser usada no ajax da submissão da venda.
+        window.BASE_URL = "<?php echo URLADM; ?>";
+    </script>
+
 
 </head>
 <body> 

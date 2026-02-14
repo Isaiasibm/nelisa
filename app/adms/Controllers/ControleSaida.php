@@ -14,7 +14,7 @@ if (!defined('URL')) {
  *
  * @copyright (c) 2019, IBM - NELISA
  */
-class controleSaida {
+class ControleSaida {
 
     private $Resultado;
     private $Dados;

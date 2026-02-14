@@ -108,4 +108,65 @@ body {
 .titulo{
     font-size: 2.0rem !important;
 }
- 
+
+/* Estilo dos cards do dashboard */
+.card{
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.card-body{
+    padding: 1.5rem;
+}
+.card-body i{
+    margin-bottom: 0.5rem;
+}
+.card-title{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 576px){
+    .titulo{
+        font-size: 1.2rem !important;
+        text-align: center;
+    }
+    .sidebar{
+        min-width: 200px;
+        max-width: 200px;
+    }
+    .navbar-brand{
+        font-size: 0.9rem;
+    }
+    .card{
+        min-height: 120px;
+    }
+    .card-body{
+        padding: 1rem;
+    }
+    .card-body i{
+        font-size: 2rem !important;
+    }
+    .content{
+        padding: 0.5rem !important;
+    }
+}
+
+/* Responsividade para tablets */
+@media (min-width: 577px) and (max-width: 768px){
+    .titulo{
+        font-size: 1.5rem !important;
+    }
+    .card-body i{
+        font-size: 2.5rem !important;
+    }
+}
