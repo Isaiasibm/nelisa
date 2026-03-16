@@ -1,10 +1,9 @@
 <?php
-
 namespace App\adms\Models\helper;
 
 use PDO;
 
-if (!defined('URL')) {
+if (! defined('URL')) {
     header("Location: /");
     exit();
 }
@@ -23,14 +22,14 @@ class AdmsRead extends AdmsConn
     private $Query;
     private $Conn;
 
-    function getResultado()
+    public function getResultado()
     {
         return $this->Resultado;
     }
 
     public function exeRead($Tabela, $Termos = null, $ParseString = null)
     {
-        if (!empty($ParseString)) {
+        if (! empty($ParseString)) {
             parse_str($ParseString, $this->Values);
         }
         $this->Select = "SELECT * FROM {$Tabela} {$Termos}";
@@ -41,7 +40,7 @@ class AdmsRead extends AdmsConn
     public function fullRead($Query, $ParseString = null)
     {
         $this->Select = (string) $Query;
-        if (!empty($ParseString)) {
+        if (! empty($ParseString)) {
             parse_str($ParseString, $this->Values);
         }
         $this->exeInstrucao();
@@ -61,7 +60,7 @@ class AdmsRead extends AdmsConn
 
     private function conexao()
     {
-        $this->Conn = parent::getConn();
+        $this->Conn  = parent::getConn();
         $this->Query = $this->Conn->prepare($this->Select);
         $this->Query->setFetchMode(PDO::FETCH_ASSOC);
     }

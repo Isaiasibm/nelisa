@@ -61,8 +61,6 @@ class AdmsLogin
     {
         if (password_verify($this->Dados['senha'], $this->Resultado[0]['senha'])) {
             $_SESSION['usuario_id'] = $this->Resultado[0]['id'];
-            $_SESSION['provinciaExameMedico'] = $this->Dados['id_Provincia'];
-            $_SESSION['provinciaAvaliacaoFisica'] = $this->Dados['id_Provincia'];
             $_SESSION['usuario_nome'] = $this->Resultado[0]['nome'];
             $_SESSION['usuario_email'] = $this->Resultado[0]['email'];
             $_SESSION['usuario_imagem'] = $this->Resultado[0]['imagem'];

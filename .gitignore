@@ -1,0 +1,14 @@
+core/Config.php
+.htaccess
+index.php
+registrar_paginas_turno.php
+test_php.php
+test_controller_direto.php
+test_model_direto.php
+SISTEMA_TURNOS_README.md
+IMPLEMENTACAO_PRONTA.md
+IMPLEMENTACAO_VENDAS_CORRECAO.md
+database_shifts_migration.sql
+/database
+CHECLIST_IMPLEMENTACAO.md
+

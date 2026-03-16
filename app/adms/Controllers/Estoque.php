@@ -46,21 +46,31 @@ class Estoque
       
         if (!empty($this->Dados['btnSubmitEstoque'])){
             unset($this->Dados['btnSubmitEstoque']);
-          $qtdade= $this->Dados["qtNoPac"]*$this->Dados["qtdadeDePacotes"];  
+            $dataAtual = date('Y-m-d');
+            $dataValidade = trim((string) ($this->Dados['data_validade'] ?? ''));
+            $dataCompra = trim((string) ($this->Dados['data_compra'] ?? ''));
+
+            if (! empty($dataValidade) && strtotime($dataValidade) < strtotime($dataAtual)) {
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>A data de validade não pode ser anterior à data de registo ({$dataAtual}).</div>";
+            } elseif (! empty($dataCompra) && strtotime($dataCompra) > strtotime($dataAtual)) {
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>A data de compra não pode ser superior à data atual ({$dataAtual}).</div>";
+            } else {
+                $qtdade = $this->Dados["qtNoPac"] * $this->Dados["qtdadeDePacotes"];
      // ====================== Script Para Registar Dados do Produto ====================
 
                     #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-            $dadosEstoque = array('id_produto'=>$this->Dados["id_produto"],'lote'=>$this->Dados["lote"],'quantidade'=>$qtdade,'preco_compra'=>$this->Dados["preco_custo"],'preco_venda'=>$this->Dados["precoVenda"],'id_fornecedor'=>$this->Dados["fornecedor"],'data_validade'=>$this->Dados["data_validade"],'data_compra'=>$this->Dados["data_compra"],'id_estado'=>$this->Dados["estado"],'quantidade_disponivel'=>$qtdade,'id_user'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
+                $dadosEstoque = array('id_produto'=>$this->Dados["id_produto"],'lote'=>$this->Dados["lote"],'quantidade'=>$qtdade,'preco_compra'=>$this->Dados["preco_custo"],'preco_venda'=>$this->Dados["precoVenda"],'id_fornecedor'=>$this->Dados["fornecedor"],'data_validade'=>$this->Dados["data_validade"],'data_compra'=>$this->Dados["data_compra"],'id_estado'=>$this->Dados["estado"],'quantidade_disponivel'=>$qtdade,'id_user'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
             
-            $cadEstoque->cadastrarEstoque($dadosEstoque);
-            if($cadEstoque->getResultado()>=1){
-             $_SESSION['msgcad'] = "<div class='alert alert-success'>Estoque adicionado com sucesso!
+                $cadEstoque->cadastrarEstoque($dadosEstoque);
+                if($cadEstoque->getResultado()>=1){
+                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Estoque adicionado com sucesso!
                                     </div>";
-                                    unset($this->Dados);
-                    }
-                    else{
-                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível adicionar ao estoque"."</div>";
-                    }
+                    unset($this->Dados);
+                }
+                else{
+                    $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível adicionar ao estoque"."</div>";
+                }
+            }
            
             //===================================== Fim Script regista Estoque ==============================
                 }  

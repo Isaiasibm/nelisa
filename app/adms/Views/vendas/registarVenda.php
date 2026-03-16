@@ -33,7 +33,11 @@
 
     <div class="form-group col-md-12">
    
-        <table class="table table-striped table-hover table-bordered tabelaPersonalizadaDataTable">
+       <div class="table-responsive vendas-table-wrap">
+ <table class="table table-striped table-hover table-bordered tabelaPersonalizadaDataTable w-100"
+       data-page-length="5"
+       data-priority="2,3,8"
+       data-low-priority="0,1,4,5,6,7">
             <thead>
                 <tr>
                     <th>#</th>     
@@ -73,7 +77,7 @@
                             <td class='tg-lboi'>
                                 <div class='dropdown'>
                                 <button class='btn btn-primary btn-add-cart' 
-                                                data-id=' $id_produto' 
+                                                data-id='$id_produto' 
                                                 data-nome='$nome_produto' 
                                                 data-preco='$preco_venda'
                                                 data-estoque='$quantidade_estoque'>
@@ -91,6 +95,7 @@
                     ?>
             </tbody>
         </table>
+        </div>
 
     </div>
 </div> 
@@ -112,11 +117,16 @@
                 <!-- O carrinho será preenchido dinamicamente -->
                 </tbody>
             </table>
-            <div class="text-right">
-                <h4>Total: <span id="total">0.00</span> Kz</h4>
-                <button id="checkout-enable" class="btn btn-primary">Checkout</button>
-               
-            </div>
+          <div class="checkout-bar mt-2">
+  <div class="checkout-total">
+    <span class="label">Total</span>
+    <span class="value"><span id="total">0.00</span> Kz</span>
+  </div>
+
+  <div class="checkout-actions">
+    <button id="checkout-enable" class="btn btn-primary btn-sm">Checkout</button>
+  </div>
+</div>
         </div>
        
         <div class="form-group col-md-1"> </div>
@@ -149,7 +159,11 @@
     <input name="nif_cliente" type="text" class="form-control" id="nif_cliente" placeholder="Nif do cliente">
     <input name="nome_cliente" type="text" class="form-control" id="nome_cliente" placeholder="Nome do cliente">
     
-                <button id="finalizar-compra" class="btn btn-success" style="display: none;">Finalizar Compra</button>
+                <div class="checkout-actions-right mt-2">
+  <button id="finalizar-compra" class="btn btn-success btn-sm w-100" style="display: none;">
+    Finalizar Compra
+  </button>
+</div>
         </div>
 
 

@@ -1,139 +1,186 @@
-<?php 
-
-
+<?php
 namespace App\adms\Controllers;
 
-class ControllerRequisicao extends Controller {
+class ControllerRequisicao extends Controller
+{
     private $Dados;
     private $result;
 
-	public function ReciveRequest() {
+    public function ReciveRequest()
+    {
+        header('Content-Type: application/json; charset=utf-8');
 
+        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-		header('Content-Type: application/json; charset=utf-8');
+        $vendaModel = new \App\adms\Models\admsVenda();
 
-		$this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-		$regVenda = new \App\adms\Models\admsVenda();
-		$regItems = new \App\adms\Models\admsVenda();
-		$regPagVenda = new \App\adms\Models\admsVenda();
-		$regDetalhePag = new \App\adms\Models\admsVenda();
-		$updEstoque = new \App\adms\Models\admsVenda();
-					
-		if (isset($this->Dados['accao']) && $this->Dados['accao'] === "RealizarVenda") {
-				
-			$carrinho = json_decode($this->Dados['carrinho'], true);
-			if (!empty($carrinho)) {
-		//$valorVendido= (double)$this->Dados['totalVenda'];
-			
-//Array das vendas
-//var_dump($carrinho);
+        // 1) validar ação
+        if (empty($this->Dados['accao']) || $this->Dados['accao'] !== "RealizarVenda") {
+            echo json_encode(['success' => false, 'message' => 'Ação inválida']);
+            exit;
+        }
 
-				$DadosVenda =  array('total'=>$this->Dados['totalVenda'],'id_usuario'=> (int) $_SESSION['usuario_id'],'data_venda'=>date('Y-m-d H:i:s'));
-				//Registo de venda
-				$regVenda->cadastrarVenda($DadosVenda);
+        // 2) validar turno
+        if (empty($_SESSION['turno_id'])) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Nenhum turno ativo. Inicie um turno para registar vendas.',
+            ]);
+            exit;
+        }
 
-					if ($regVenda->getResultado() >= 1) { 
-						$idVenda = $regVenda->getResultado(); // ID da venda
-$dataHoje = date('Y-m-d');
+        // 3) validar carrinho
+        $carrinho = json_decode($this->Dados['carrinho'] ?? '[]', true);
+        if (empty($carrinho) || !is_array($carrinho)) {
+            echo json_encode(['success' => false, 'message' => 'Carrinho vazio ou dados inválidos']);
+            exit;
+        }
 
-// Conta o número de vendas já feitas no mesmo dia
-$totalHoje = $regVenda->contarVendasDoDia($dataHoje);
+        // 4) (RECOMENDADO) idempotência para evitar duplicação
+        // Requer criar tabela tb_request_venda (SQL abaixo) + métodos no model.
+        $requestId = trim($this->Dados['request_id'] ?? '');
+             
+        if ($requestId !== '') {
+            $ja = $vendaModel->buscarRequestVenda($requestId);
+            if ($ja) {
+                echo json_encode([
+                    'success' => true,
+                    'numero_fatura' => $ja['numero_fatura'] ?? '',
+                    'message' => 'Venda já processada anteriormente. Se desejar realizar outra venda, selecione novamente os produtos.',
+                ]);
+                exit;
+            }
+        }
 
-// Cria número da fatura
-$numeroFatura = 'FAT-' . str_pad($idVenda, 4, '0', STR_PAD_LEFT) . '-' . str_pad($totalHoje, 4, '0', STR_PAD_LEFT);
-	
-							
-							// Carregar os itens do carrinho...
-						foreach ($carrinho as $item) {
+  
 
-							
-							//	Registar itens de venda
-								$itensVenda = array('id_venda'=>$regVenda->getResultado(),'id_produto'=>$item["id"], 'quantidade'=>$item["quantidade"],'preco_unitario'=>$item["preco"],'subtotal'=>$item["subtotal"],'id_usuario'=> (int) $_SESSION['usuario_id'],'created'=>date('Y-m-d H:i:s'));
-								
-								$regItems->cadastrarItemVenda($itensVenda);
-						
-							if ($regItems->getResultado() >= 1) { 
-									// Registar de pagamento
+        // 5) registar venda (1x)
+        $DadosVenda = [
+            'total' => (double)$this->Dados['totalVenda'],
+            'id_usuario' => (int)$_SESSION['usuario_id'],
+            'id_turno' => (int)$_SESSION['turno_id'],
+            'data_venda' => date('Y-m-d H:i:s')
+        ];
 
-									//Atualizar o estoque
-						
-/*
-							$itensVenda=array('quantidade_disponivel'=>$item["estoque"]);
-							$idProduto=$item["id"];							
-							//$updEstoque->updateEstoque($itensVenda,$idProduto);	
-							*/
-						
+        $vendaModel->cadastrarVenda($DadosVenda);
 
-							$updEstoque->decrementarEstoque($item["id"], $item["quantidade"]);
-							
-									//Calcular o valor total pago
-									$valorTotalPago = $this->Dados['emDinheiro'] + $this->Dados['multicaixa'] + $this->Dados['transferencia'];
-									//Registar dados na tabela Pagamento venda
-									$pagVenda = array('id_venda'=>$regVenda->getResultado(),'valor_total'=>$this->Dados["totalVenda"], 'valor_pago'=>$valorTotalPago,'troco'=>$this->Dados["troco"],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
+        if ($vendaModel->getResultado() < 1) {
+            echo json_encode(['success' => false, 'message' => 'Falha ao realizar a venda']);
+            exit;
+        }
 
-									$regPagVenda->cadastrarPagamentoVenda($pagVenda);
-										if ($regPagVenda->getResultado() >= 1) { 
-											
-											if ($this->Dados['emDinheiro']>0) {
-												$detalhePag = array('id_pagamento'=>$regPagVenda->getResultado(),'id_forma_pagamento'=>1, 'valor_pagamento'=>$this->Dados['emDinheiro'],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
-												$regDetalhePag->cadastrarDetalhesPagamento($detalhePag);
-												
-											}
-											if ($this->Dados['multicaixa']>0) {
-												$detalhePag = array('id_pagamento'=>$regPagVenda->getResultado(),'id_forma_pagamento'=>2, 'valor_pagamento'=>$this->Dados['multicaixa'],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
-																						
-												$regDetalhePag->cadastrarDetalhesPagamento($detalhePag);
-												}
-											if ($this->Dados['transferencia']>0) {
-												$detalhePag = array('id_pagamento'=>$regPagVenda->getResultado(),'id_forma_pagamento'=>3, 'valor_pagamento'=>$this->Dados['transferencia'],'id_usuario'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));											
-												$regDetalhePag->cadastrarDetalhesPagamento($detalhePag);
-											}
-											
-											$this->result = [
-												'success' => true,
-												'numero_fatura' => $numeroFatura,
-												'message' => 'Venda realizada com sucesso Ok OK',
-											];
-										
-										}
+        $idVenda = (int)$vendaModel->getResultado();
 
-								}
+        // número da fatura
+        $dataHoje = date('Y-m-d');
+        $totalHoje = $vendaModel->contarVendasDoDia($dataHoje);
+        $numeroFatura = 'FAT-' . str_pad($idVenda, 4, '0', STR_PAD_LEFT) . '-' . str_pad($totalHoje, 4, '0', STR_PAD_LEFT);
 
-			
-						} 
-				
-							
-			// var_dump($this->result);
-					} else {
-						$this->result = [
-							'success' => false,
-							'message' => 'Falha ao realizar a venda',
-						];
-					}
-					
-			} 
-			else {
-					$this->result = [
-						'success' => false,
-						'message' => 'Carrinho vazio ou dados inválidos',
-					];
-					}
-			
-		
-			
-		}
-		else {
-				$this->result = [
-					'success' => false,
-					'message' => 'Ação inválida',
-				];
-			}
-		echo json_encode($this->result);
-		exit;
+        // 6) registar itens e tentar atualizar estoque
+        foreach ($carrinho as $item) {
+            $idProduto = (int)($item["id"] ?? 0);
+            $qtd = (int)($item["quantidade"] ?? 0);
+            $preco = (double)($item["preco"] ?? 0);
+            $subtotal = (double)($item["subtotal"] ?? 0);
 
-	}
+            if ($idProduto <= 0 || $qtd <= 0) {
+                continue; // ignora item inválido
+            }
 
+            $itensVenda = [
+                'id_venda' => $idVenda,
+                'id_produto' => $idProduto,
+                'quantidade' => $qtd,
+                'preco_unitario' => $preco,
+                'subtotal' => $subtotal,
+                'id_usuario' => (int)$_SESSION['usuario_id'],
+                'created' => date('Y-m-d H:i:s')
+            ];
+
+            $vendaModel->cadastrarItemVenda($itensVenda);
+
+            if ($vendaModel->getResultado() < 1) {
+                echo json_encode(['success' => false, 'message' => 'Falha ao registar itens de venda']);
+                exit;
+            } else {
+                // Se item registrado com sucesso, decrementa estoque
+            $vendaModel->decrementarEstoque($item["id"], $item["quantidade"]);
+ 
+            }
+        }
+
+        // 7) registar pagamento (1x, FORA do loop)
+        $emDinheiro = (double)($this->Dados['emDinheiro'] ?? 0);
+        $multicaixa = (double)($this->Dados['multicaixa'] ?? 0);
+        $transferencia = (double)($this->Dados['transferencia'] ?? 0);
+
+        $valorTotalPago = $emDinheiro + $multicaixa + $transferencia;
+
+        $pagVenda = [
+            'id_venda' => $idVenda,
+            'valor_total' => (double)$this->Dados["totalVenda"],
+            'valor_pago' => $valorTotalPago,
+            'troco' => (double)($this->Dados["troco"] ?? 0),
+            'id_usuario' => (int)$_SESSION['usuario_id'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        $vendaModel->cadastrarPagamentoVenda($pagVenda);
+
+        if ($vendaModel->getResultado() < 1) {
+            echo json_encode(['success' => false, 'message' => 'Falha ao registar pagamento']);
+            exit;
+        }
+
+        $idPagamento = (int)$vendaModel->getResultado();
+
+        // 8) detalhes pagamento (0..3)
+        if ($emDinheiro > 0) {
+            $vendaModel->cadastrarDetalhesPagamento([
+                'id_pagamento' => $idPagamento,
+                'id_forma_pagamento' => 1,
+                'valor_pagamento' => $emDinheiro,
+                'id_usuario' => (int)$_SESSION['usuario_id'],
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        if ($multicaixa > 0) {
+            $vendaModel->cadastrarDetalhesPagamento([
+                'id_pagamento' => $idPagamento,
+                'id_forma_pagamento' => 2,
+                'valor_pagamento' => $multicaixa,
+                'id_usuario' => (int)$_SESSION['usuario_id'],
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        if ($transferencia > 0) {
+            $vendaModel->cadastrarDetalhesPagamento([
+                'id_pagamento' => $idPagamento,
+                'id_forma_pagamento' => 3,
+                'valor_pagamento' => $transferencia,
+                'id_usuario' => (int)$_SESSION['usuario_id'],
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        // 9) gravar request_id (idempotência) se existir
+        if ($requestId !== '') {
+            
+            $vendaModel->gravarRequestVenda([
+                'request_id' => $requestId,
+                'id_venda' => $idVenda,
+                'numero_fatura' => $numeroFatura,
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        echo json_encode([
+            'success' => true,
+            'numero_fatura' => $numeroFatura,
+            'message' => 'Venda realizada com sucesso'
+        ]);
+        exit;
+    }
 }
-
-
-?>

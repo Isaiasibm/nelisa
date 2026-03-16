@@ -1,8 +1,14 @@
 <div class="content p-1">
     <div class="list-group-item">
+        <?php
+        $saidaEdicao = $this->Dados['saidaEdicao'] ?? null;
+        $isEdicao = !empty($saidaEdicao);
+        ?>
         <div class="d-flex">
             <div class="mr-auto p-2 resposta">
-                <h2 class="display-4 titulo badge badge-default" style="color: black;">Registar Saídas</h2>
+                <h2 class="display-4 titulo badge badge-default" style="color: black;">
+                    <?php echo $isEdicao ? 'Editar Saída' : 'Registar Saídas'; ?>
+                </h2>
             </div>
             <div class="p-2">
                 <a href="<?php echo URLADM . 'home/index/' ?>" class="btn btn-outline-info btn-sm">Fechar</a>
@@ -21,6 +27,9 @@
         <hr style="border: 1px solid #8FBCF ">
 
         <form action="" method="post">
+            <?php if ($isEdicao): ?>
+                <input type="hidden" name="id_saida" value="<?php echo (int)$saidaEdicao['id']; ?>">
+            <?php endif; ?>
             <div class="form-row">
        
 
@@ -32,7 +41,8 @@
                         $tipoSaida = new \App\adms\Models\helper\AdmsRead();
                         $tipoSaida->ExeRead('tb_tipo_saida');
                         foreach ($tipoSaida->getResultado() as $tipo_saida) {
-                            echo "<option value='{$tipo_saida['id']}'>{$tipo_saida['descricao']}</option>";
+                            $selected = ($isEdicao && (int)$saidaEdicao['id_tipo_saida'] === (int)$tipo_saida['id']) ? 'selected' : '';
+                            echo "<option value='{$tipo_saida['id']}' {$selected}>{$tipo_saida['descricao']}</option>";
                         }
                         ?>
                     </select>
@@ -40,18 +50,22 @@
 
             <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span> Quanto Custou:</label>
-                    <input type="text" name="valor_saida" class="form-control" required>
+                    <input type="text" name="valor_saida" class="form-control" required
+                        value="<?php echo htmlspecialchars($saidaEdicao['valor'] ?? ''); ?>">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span> Data da saída:</label>
-                    <input type="date" name="data_saida" class="form-control" required>
+                    <input type="date" name="data_saida" class="form-control" required
+                        max="<?php echo date('Y-m-d'); ?>"
+                        value="<?php echo !empty($saidaEdicao['data_saida']) ? date('Y-m-d', strtotime($saidaEdicao['data_saida'])) : ''; ?>">
                 </div>
                  
 
                 <div class="form-group col-md-3">
                     <label><span class="text-danger">*</span> Descrição da saída:</label>
-                    <input type="text" name="descricao_saida" class="form-control" required>
+                    <input type="text" name="descricao_saida" class="form-control" required
+                        value="<?php echo htmlspecialchars($saidaEdicao['descricao'] ?? ''); ?>">
                 </div>
                 </div>
 
@@ -66,7 +80,8 @@
                         $localizacoes = new \App\adms\Models\helper\AdmsRead();
                         $localizacoes->ExeRead('tb_pessoa');
                         foreach ($localizacoes->getResultado() as $loc) {
-                            echo "<option value='{$loc['Cod_Pessoa']}'>{$loc['Nome']}</option>";
+                            $selected = ($isEdicao && (int)$saidaEdicao['id_responsavel_saida'] === (int)$loc['Cod_Pessoa']) ? 'selected' : '';
+                            echo "<option value='{$loc['Cod_Pessoa']}' {$selected}>{$loc['Nome']}</option>";
                         } 
                         ?>
                     </select>
@@ -80,7 +95,8 @@
                         $localizacoes = new \App\adms\Models\helper\AdmsRead();
                         $localizacoes->ExeRead('tb_pessoa');
                         foreach ($localizacoes->getResultado() as $loc) {
-                            echo "<option value='{$loc['Cod_Pessoa']}'>{$loc['Nome']}</option>";
+                            $selected = ($isEdicao && (int)$saidaEdicao['id_autorizou'] === (int)$loc['Cod_Pessoa']) ? 'selected' : '';
+                            echo "<option value='{$loc['Cod_Pessoa']}' {$selected}>{$loc['Nome']}</option>";
                         }
                         ?>
                     </select>
@@ -89,7 +105,12 @@
             </div>
 
                      <div class="form-group">
-                     <button type="submit" class="btn btn-success float-left" value="Guardar" name="btnSubmitSaida" style="border-radius:7px 7px;"><i class="fas fa-save fa-1x"></i>&nbsp;&nbsp;Guardar </button>
+                     <?php if ($isEdicao): ?>
+                        <button type="submit" class="btn btn-success float-left" value="Atualizar" name="btnEditarSaida" style="border-radius:7px 7px;"><i class="fas fa-save fa-1x"></i>&nbsp;&nbsp;Atualizar </button>
+                        <a href="<?php echo URLADM . 'controleSaida/listarSaida'; ?>" class="btn btn-secondary ml-2">Cancelar</a>
+                     <?php else: ?>
+                        <button type="submit" class="btn btn-success float-left" value="Guardar" name="btnSubmitSaida" style="border-radius:7px 7px;"><i class="fas fa-save fa-1x"></i>&nbsp;&nbsp;Guardar </button>
+                     <?php endif; ?>
                      </div>
                      <br>
         </form>

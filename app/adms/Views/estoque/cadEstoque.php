@@ -1,12 +1,3 @@
-<!-- Estilos do Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-
-<!-- jQuery (necessário para o Select2) -->
-
-
-<!-- Script do Select2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-
 <div class="content p-1">
     <div class="list-group-item">
         <div class="d-flex">
@@ -24,6 +15,7 @@
             echo $_SESSION['msgcad'];
             unset($_SESSION['msgcad']);
         }
+        $dataHoje = date('Y-m-d');
         ?>
         <form method="POST" action="" enctype="multipart/form-data"> 
 
@@ -33,11 +25,14 @@
                 <select class="form-control select2" name="id_produto" id="select-produto" required>
                     <option value="">Digite, escaneie ou selecione um produto...</option>
                     <?php
-                     $vis = new \App\adms\Models\helper\AdmsRead();
-                     $vis->ExeRead('tb_produtos');
+                    $vis = new \App\adms\Models\helper\AdmsRead();
+                    $vis->ExeRead('tb_produtos');
                     foreach ($vis->getResultado() as $produto) {
-                        extract($produto);
-                        echo "<option value='{$id_produto}'>({$bar_code}) {$nome_produto}</option>";
+                        $idProduto = (int) ($produto['id_produto'] ?? 0);
+                        $barCode = htmlspecialchars((string) ($produto['bar_code'] ?? ''), ENT_QUOTES, 'UTF-8');
+                        $nomeProduto = htmlspecialchars((string) ($produto['nome_produto'] ?? ''), ENT_QUOTES, 'UTF-8');
+
+                        echo "<option value='{$idProduto}'>{$idProduto} - ({$barCode}) {$nomeProduto}</option>";
                     }
                     ?>
                 </select>
@@ -82,14 +77,14 @@
 
                 <div class="form-group col-md-2">
                     <label><span class="text-danger">*</span> Data Validade</label>
-                    <input name="data_validade" type="date" class="form-control">
+                    <input name="data_validade" id="data_validade" type="date" class="form-control" min="<?php echo $dataHoje; ?>">
                 </div>
                 
 
           
                 <div class="form-group col-md-2">
                     <label><span class="text-danger">*</span> Data Compra</label>
-                    <input name="data_compra" type="date" class="form-control" required>
+                    <input name="data_compra" id="data_compra" type="date" class="form-control" max="<?php echo $dataHoje; ?>" required>
                 </div>
                 
 
@@ -134,32 +129,109 @@
 
 <!-- Scripts para inicializar o Select2 e automação do código de barras -->
 <script>
-    $(document).ready(function() {
-        // Inicializa o Select2
-        $('#select-produto').select2({
-            placeholder: "Digite, escaneie ou selecione um produto...",
-            allowClear: true
-        });
-
-        // Preenche automaticamente o campo de código de barras ao selecionar um produto
-        $('#select-produto').on('change', function() {
-            var selectedOption = $(this).find('option:selected');
-            var barcode = selectedOption.text().match(/\((.*?)\)/); // Captura o código de barras dentro dos parênteses
-            if (barcode) {
-                $('#barcode').val(barcode[1]); // Preenche o campo de código de barras automaticamente
+    (function() {
+        function inicializarSelectProduto() {
+            if (!window.jQuery || !window.jQuery.fn || typeof window.jQuery.fn.select2 !== 'function') {
+                return;
             }
-        });
 
-        // Seleciona automaticamente o produto ao escanear um código de barras
-        $('#barcode').on('change', function() {
-            var barcodeValue = $(this).val().trim();
-            if (barcodeValue !== "") {
-                $("#select-produto option").each(function() {
-                    if ($(this).text().includes(barcodeValue)) {
-                        $('#select-produto').val($(this).val()).trigger('change');
-                    }
-                });
+            var $select = window.jQuery('#select-produto');
+            if (!$select.length || $select.hasClass('select2-hidden-accessible')) {
+                return;
             }
-        });
-    });
+
+            $select.select2({
+                placeholder: 'Digite, escaneie ou selecione um produto...',
+                allowClear: true,
+                width: '100%'
+            });
+        }
+
+        function aplicarValidacaoDatas() {
+            var inputValidade = document.getElementById('data_validade');
+            var inputCompra = document.getElementById('data_compra');
+
+            if (!inputValidade || !inputCompra) {
+                return;
+            }
+
+            var hoje = new Date().toISOString().slice(0, 10);
+            inputValidade.min = hoje;
+            inputCompra.max = hoje;
+
+            inputValidade.addEventListener('change', function() {
+                if (inputValidade.value && inputValidade.value < hoje) {
+                    inputValidade.setCustomValidity('A data de validade não pode ser anterior à data de registo.');
+                } else {
+                    inputValidade.setCustomValidity('');
+                }
+            });
+
+            inputCompra.addEventListener('change', function() {
+                if (inputCompra.value && inputCompra.value > hoje) {
+                    inputCompra.setCustomValidity('A data de compra não pode ser superior à data atual.');
+                } else {
+                    inputCompra.setCustomValidity('');
+                }
+            });
+        }
+
+        function aplicarCalculoPrecos() {
+            var inputItensPacote = document.getElementById('qtNoPac');
+            var inputCustoPacote = document.getElementById('preco_custo_pacote');
+            var inputCustoItem = document.getElementById('preco_custo_item');
+            var inputPercentual = document.getElementById('percentual_ganho');
+            var inputPrecoVenda = document.getElementById('preco_venda_item');
+
+            if (!inputItensPacote || !inputCustoPacote || !inputCustoItem || !inputPercentual || !inputPrecoVenda) {
+                return;
+            }
+
+            function parseNumero(valor) {
+                if (!valor) {
+                    return 0;
+                }
+
+                var normalizado = valor.toString().replace(/\s/g, '').replace(',', '.');
+                var numero = parseFloat(normalizado);
+                return isNaN(numero) ? 0 : numero;
+            }
+
+            function formatarNumero(valor) {
+                return (Math.round(valor * 100) / 100).toFixed(2);
+            }
+
+            function calcularCampos() {
+                var itensPacote = parseNumero(inputItensPacote.value);
+                var custoPacote = parseNumero(inputCustoPacote.value);
+                var percentual = parseNumero(inputPercentual.value);
+
+                if (itensPacote > 0 && custoPacote > 0) {
+                    var custoItem = custoPacote / itensPacote;
+                    inputCustoItem.value = formatarNumero(custoItem);
+
+                    var precoVenda = custoItem + (custoItem * (percentual / 100));
+                    inputPrecoVenda.value = formatarNumero(precoVenda);
+                    return;
+                }
+
+                if (parseNumero(inputCustoItem.value) > 0) {
+                    var custoManual = parseNumero(inputCustoItem.value);
+                    var precoVendaManual = custoManual + (custoManual * (percentual / 100));
+                    inputPrecoVenda.value = formatarNumero(precoVendaManual);
+                }
+            }
+
+            inputItensPacote.addEventListener('input', calcularCampos);
+            inputCustoPacote.addEventListener('input', calcularCampos);
+            inputCustoItem.addEventListener('input', calcularCampos);
+            inputPercentual.addEventListener('input', calcularCampos);
+
+            calcularCampos();
+        }
+
+        window.addEventListener('load', inicializarSelectProduto);
+        window.addEventListener('load', aplicarValidacaoDatas);
+        window.addEventListener('load', aplicarCalculoPrecos);
+    })();
 </script>

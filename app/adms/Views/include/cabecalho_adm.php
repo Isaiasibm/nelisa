@@ -22,9 +22,13 @@ if (!defined('URL')) {
 
     <!-- Estilos do painel -->
     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/dashboard.css'; ?>">
+     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/vendas.css'; ?>">
 
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/dataTables.bootstrap4.min.css'; ?>">
+
+   <link href="https://cdn.datatables.net/v/bs4/dt-2.3.7/r-3.0.8/datatables.min.css" rel="stylesheet" integrity="sha384-iIA1v+h7y5huqT/4gPPivkpvZenGQ4GPhS3rlIolp5LaKPRoVzNyMm+4ekOVBerF" crossorigin="anonymous">
+ 
 
     <!-- Select2 - Adicionando Importação Global -->
 

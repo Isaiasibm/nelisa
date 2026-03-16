@@ -4,7 +4,9 @@ if (!defined('URL')) {
     exit();
 }
 ?>
-<div class="d-flex">
+<div class="d-flex app-layout">
+
+
     <nav class="sidebar" style="">
         <ul class="list-unstyled">
             <?php

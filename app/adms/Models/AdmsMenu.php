@@ -1,8 +1,7 @@
 <?php
-
 namespace App\adms\Models;
 
-if (!defined('URL')) {
+if (! defined('URL')) {
     header("Location: /");
     exit();
 }
@@ -15,13 +14,12 @@ if (!defined('URL')) {
 class AdmsMenu
 {
     private $Resultado;
-   
-    function getResultado()
+
+    public function getResultado()
     {
         return $this->Resultado;
     }
 
-            
     public function itemMenu()
     {
         $listItemMenu = new \App\adms\Models\helper\AdmsRead();
@@ -34,7 +32,7 @@ class AdmsMenu
                 WHERE nivpg.adms_niveis_acesso_id =:adms_niveis_acesso_id
                 AND nivpg.permissao =:permissao
                 AND nivpg.lib_menu =:lib_menu
-                ORDER BY men.ordem, nivpg.ordem ASC", "adms_niveis_acesso_id=".$_SESSION['adms_niveis_acesso_id']."&permissao=1&lib_menu=1");
+                ORDER BY men.ordem, nivpg.ordem ASC", "adms_niveis_acesso_id=" . $_SESSION['adms_niveis_acesso_id'] . "&permissao=1&lib_menu=1");
         $this->Resultado = $listItemMenu->getResultado();
         return $this->Resultado;
     }

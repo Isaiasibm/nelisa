@@ -1,0 +1,80 @@
+
+/* =========================
+   APENAS REGISTAR VENDAS
+   (não afeta outras páginas)
+========================= */
+
+.vendas-page .vendas-table-wrap{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vendas-page .tabelaPersonalizadaDataTable{
+  width: 100% !important;
+}
+
+/* evita que palavras enormes quebrem mal */
+.vendas-page td, 
+.vendas-page th{
+  vertical-align: middle;
+}
+
+/* barra do total + checkout (desktop alinhado) */
+.vendas-page .checkout-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.vendas-page .checkout-total .label{
+  display:block;
+  font-size: 12px;
+  opacity: .75;
+}
+
+.vendas-page .checkout-total .value{
+  display:block;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* inputs pagamento melhor alinhados */
+.vendas-page #campos-pagamento .form-inline{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vendas-page #campos-pagamento .form-inline label{
+  min-width: 130px;
+  margin-bottom: 0;
+}
+
+.vendas-page #campos-pagamento .form-inline input{
+  flex: 1 1 220px;
+}
+
+/* mobile: empilha e melhora espaçamento */
+@media (max-width: 768px){
+  .vendas-page .checkout-bar{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vendas-page #campos-pagamento .form-inline label{
+    min-width: auto;
+  }
+
+  /* carrinho e pagamento em coluna */
+  .vendas-page #carrinhoDiv .form-group.col-md-6,
+  .vendas-page #carrinhoDiv .form-group.col-md-5{
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

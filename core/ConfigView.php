@@ -5,7 +5,7 @@ namespace Core;
 /**
  * Description of ConfigView
  *
- * @copyright (c) year, Cesar Szpak - Celke
+ * @copyright (c) 2026, Isaías Moisés - IBM Nelisa
  */
 class ConfigView
 {

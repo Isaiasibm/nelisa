@@ -44,17 +44,9 @@ class ControllerAdministracao {
         if (!empty($this->Dados['btnSubmitFabricante'])):
             unset($this->Dados['btnSubmitFabricante']);
 
-            /*
-            if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
+      
 
-                $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
-              
-          }else{        
-          */  
-
-        // ====================== Script Para Registar Dados do Produto ====================
-
-                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
             $dadosFabricante = array('nome_fabricante'=>$this->Dados["fabricante"],'id_user'=> (int) $_SESSION['usuario_id'],'created'=>date('Y-m-d H:i:s'));
             
             
@@ -87,10 +79,8 @@ class ControllerAdministracao {
 
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-      
         $cadFornecedor = new \App\adms\Models\admsAdministracao();
-      
-      
+
         if (!empty($this->Dados['btnSubmitFornecedor'])):
             unset($this->Dados['btnSubmitFornecedor']);
 
@@ -98,30 +88,26 @@ class ControllerAdministracao {
             if (!empty($CadPessoa->verificaDocumento($this->Dados["documento"]))) {
 
                 $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
-              
           }else{        
           */  
 
         // ====================== Script Para Registar Dados do Produto ====================
 
                     #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-                    $dadosFornecedor = array('nome'=>$this->Dados["nome"],'nif'=>$this->Dados["nif"],'email'=>$this->Dados["email"],'endereco'=>$this->Dados["endereco"],'telefone'=>$this->Dados["telefone"],'id_user'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
-            
-            
+            $dadosFornecedor = array('nome'=>$this->Dados["nome"],'nif'=>$this->Dados["nif"],'email'=>$this->Dados["email"],'endereco'=>$this->Dados["endereco"],'telefone'=>$this->Dados["telefone"],'id_user'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
 
             $cadFornecedor->cadastrarFornecedor($dadosFornecedor);
 
             if($cadFornecedor->getResultado()>=1){
 
-                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Fornecedor registado com sucesso!
-                                    </div>";
-                                    unset($this->Dados);
+                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Fornecedor registado com sucesso!
+                            </div>";
+                            unset($this->Dados);
                     }
                     else{
 
                         $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível registar o fornecedor"."</div>";
-                    }
-           
+                    }           
         //===================================== Fim Script regista Produto ==============================
             
         endif; 
@@ -129,9 +115,10 @@ class ControllerAdministracao {
         $this->Dados['menu'] = $listarMenu->itemMenu();
         $carregarView = new \Core\ConfigView("adms/Views/administracao/registarFornecedor", $this->Dados);
         $carregarView->renderizar();
-
-        
+    
     }
+
+    
     
 
 }

@@ -1,172 +1,205 @@
-body {
-    background-color: #eaeef3;
+/* ===========================
+   BASE
+=========================== */
+:root{
+  --nav-h: 56px;
+  --sidebar-w: 250px;
 }
-.menu-header{
-    color: #FFF !important;
+
+html, body{
+  height: 100%;
 }
+
+body{
+  background-color: #eaeef3;
+  margin: 0;
+}
+
+.menu-header{ color:#FFF !important; }
+
+.titulo{
+  font-size: 2.0rem !important;
+}
+
+/* ===========================
+   APP SHELL (wrapper principal)
+   - sidebar fixa
+   - só conteúdo rola
+=========================== */
+@media (min-width: 769px){
+  body{ overflow: hidden; }
+
+  /* IMPORTANTE: só o wrapper principal */
+  .app-shell{
+    height: calc(100vh - var(--nav-h));
+    overflow: hidden;
+  }
+
+  .sidebar{
+    height: calc(100vh - var(--nav-h));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--nav-h);
+    flex: 0 0 var(--sidebar-w);
+  }
+
+  .content{
+    height: calc(100vh - var(--nav-h));
+    overflow-y: auto;
+    padding: 12px;
+    width: 100%;
+  }
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
 .sidebar{
-    background-color: #222c3c;
-    min-width: 250px;
-    max-width: 250px;
-    min-height: calc(100vh - 56px);
-    transition: all 0.3s;
+  background-color: #222c3c;
+  min-width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
+  transition: all 0.25s ease;
 }
 
+/* Desktop toggle */
 .sidebar.toggled{
-    margin-left: -250px;
+  margin-left: calc(-1 * var(--sidebar-w));
 }
 
-
-
-/* Mobile: transformar sidebar em off-canvas e usar .toggled para abrir */
-@media (max-width: 768px){
-    .sidebar{
-        position: fixed;
-        top: 56px; /* ajustar se a navbar tiver outra altura */
-        left: -250px;
-        width: 250px;
-        height: calc(100% - 56px);
-        margin-left: 0; /* remover margem-left usada anteriormente */
-        z-index: 1050;
-        transition: left .3s ease;
-    }
-    /* quando toggled -> sidebar visível no mobile */
-    .sidebar.toggled{
-        left: 0;
-    }
-
-    /* overlay que aparece quando o menu está aberto no mobile */
-    #menuOverlay{
-        display: none;
-        position: fixed;
-        top: 56px; /* mesmo top do sidebar */
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.45);
-        z-index: 1040;
-    }
-    #menuOverlay.show{
-        display: block;
-    }
-
-    /* impedir scroll do body quando menu aberto */
-    body.menu-open{
-        overflow: hidden;
-    }
-}
-
-
-
-
-
+/* Links */
+.sidebar ul{ margin:0; padding:0; }
 .sidebar ul li a{
-    display: block;
-    padding: 0.75rem 1rem;
-    color: #c7cace;
-    text-decoration: none;
+  display: block;
+  padding: 0.70rem 1rem;
+  color: #c7cace;
+  text-decoration: none;
 }
-.sidebar ul li a:hover, .sidebar ul .active a{
-    color: #ecedee;
-    background-color: #354358;
+.sidebar ul li a:hover,
+.sidebar ul .active a{
+  color: #ecedee;
+  background-color: #354358;
 }
 .sidebar ul ul a{
-    padding-left: 2.5rem;
-    background-color: #1e2835;
-}
-/*Seletor utilizado para ativar o botão ocultar menu em PC*/ 
-
-
-@media (max-width: 768px){
-    .sidebar{
-        margin-left: -250px;
-    }
-    .sidebar.toggled{
-        margin-left: 0px;
-    }
+  padding-left: 2.5rem;
+  background-color: #1e2835;
 }
 
+/* Dropdown arrow */
 .sidebar [data-toggle="collapse"]{
-    position: relative;
+  position: relative;
 }
-.sidebar [data-toggle="collapse"]:before{
-    content: "\f0d7";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    position: absolute;
-    right: 1rem;
+.sidebar [data-toggle="collapse"]::before{
+  content: "\f0d7";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 1rem;
 }
 .sidebar [aria-expanded="true"]{
-    background-color: #19222d;
+  background-color: #19222d;
 }
-.sidebar [aria-expanded="true"]:before{
-    content: "\f0d8";
+.sidebar [aria-expanded="true"]::before{
+  content: "\f0d8";
 }
+
+/* ===========================
+   CONTENT
+=========================== */
 .content{
-    width: 100%;
-}
-.titulo{
-    font-size: 2.0rem !important;
+  background: #eaeef3;
+  width: 100%;
 }
 
-/* Estilo dos cards do dashboard */
-.card{
-    min-height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ===========================
+   DASHBOARD: KPI
+=========================== */
+.kpi-card{
+  border-radius: 10px;
+  min-height: 115px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.kpi-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+}
+.kpi-card .kpi-title{
+  font-size: 12px;
+  opacity: .9;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.kpi-card .kpi-value{
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Não mexer em .card global (Bootstrap manda) */
+.card-body{ padding: 1.25rem; }
+
+/* Afinar headers e accordion */
+.card-header{
+  background: #fff;
+  padding: .65rem 1rem;
+}
+.btn-link{ text-decoration: none !important; }
+.btn-link:hover{ text-decoration: none !important; }
+
+.table-responsive{ margin-bottom: 0; }
+
+/* Evitar “ares” gigantes */
+.mb-3{ margin-bottom: 0.85rem !important; }
+.mb-2{ margin-bottom: 0.65rem !important; }
+
+/* ===========================
+   MOBILE / TABLET (OFF-CANVAS)
+=========================== */
+@media (max-width: 768px){
+  body{ overflow: auto; }
+
+  .sidebar{
+    position: fixed;
+    top: var(--nav-h);
+    left: calc(-1 * var(--sidebar-w));
+    width: var(--sidebar-w);
+    height: calc(100vh - var(--nav-h));
+    margin-left: 0;
+    z-index: 1050;
+    transition: left .25s ease;
+    overflow-y: auto;
+  }
+  .sidebar.toggled{ left: 0; }
+
+  #menuOverlay{
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1040;
+  }
+  #menuOverlay.show{ display:block; }
+  body.menu-open{ overflow:hidden; }
+
+  .titulo{
+    font-size: 1.4rem !important;
     text-align: center;
-    transition: transform 0.2s;
-}
-.card:hover{
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-.card-body{
-    padding: 1.5rem;
-}
-.card-body i{
-    margin-bottom: 0.5rem;
-}
-.card-title{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+  }
+
+  .kpi-card{ min-height: 105px; }
+
+  .content{
+    padding: .6rem !important;
+    height: auto;
+    overflow: visible;
+  }
 }
 
-/* Responsividade para telas pequenas */
+/* Telas muito pequenas */
 @media (max-width: 576px){
-    .titulo{
-        font-size: 1.2rem !important;
-        text-align: center;
-    }
-    .sidebar{
-        min-width: 200px;
-        max-width: 200px;
-    }
-    .navbar-brand{
-        font-size: 0.9rem;
-    }
-    .card{
-        min-height: 120px;
-    }
-    .card-body{
-        padding: 1rem;
-    }
-    .card-body i{
-        font-size: 2rem !important;
-    }
-    .content{
-        padding: 0.5rem !important;
-    }
-}
+  :root{ --sidebar-w: 220px; }
 
-/* Responsividade para tablets */
-@media (min-width: 577px) and (max-width: 768px){
-    .titulo{
-        font-size: 1.5rem !important;
-    }
-    .card-body i{
-        font-size: 2.5rem !important;
-    }
+  .navbar-brand{ font-size: 0.9rem; }
+  .card-body{ padding: 1rem; }
 }

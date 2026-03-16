@@ -37,3 +37,7 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    const URLADM = "<?php echo URLADM; ?>";
+</script>

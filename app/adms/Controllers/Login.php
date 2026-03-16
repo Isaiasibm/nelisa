@@ -1,8 +1,7 @@
 <?php
-
 namespace App\adms\Controllers;
 
-if (!defined('URL')) {
+if (! defined('URL')) {
     header("Location: /");
     exit();
 }
@@ -19,14 +18,14 @@ class Login
 
     public function acesso()
     {
-        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT); 
+        $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if (!empty($this->Dados['SendLogin'])) {
+        if (! empty($this->Dados['SendLogin'])) {
             unset($this->Dados['SendLogin']);
 
             $visualLogin = new \App\adms\Models\AdmsLogin();
             $visualLogin->acesso($this->Dados);
-            
+
             if ($visualLogin->getResultado()) {
                 $UrlDestino = URLADM . 'home/index';
                 header("Location: $UrlDestino");
@@ -42,7 +41,7 @@ class Login
     {
         unset($_SESSION['usuario_id'], $_SESSION['usuario_nome'], $_SESSION['usuario_email'], $_SESSION['usuario_imagem'], $_SESSION['adms_niveis_acesso_id'], $_SESSION['ordem_nivac']);
         $_SESSION['msg'] = "<div class='alert alert-success'>Deslogado com sucesso</div>";
-        $UrlDestino = URLADM . 'login/acesso';
+        $UrlDestino      = URLADM . 'login/acesso';
         header("Location: $UrlDestino");
     }
 

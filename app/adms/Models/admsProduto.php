@@ -122,7 +122,7 @@ ORDER BY p.nome_produto ASC, data_validade ASC; ");
                     return $listProdutos->getResultado();
         }
 
-        public function editarProduto(array $DadosProduto, $codProduto){
+         public function editarProduto(array $DadosProduto, $codProduto){
             $this->Dados = $DadosProduto;
 
             $upload = new \App\adms\Models\helper\AdmsUpdate();
@@ -156,6 +156,8 @@ ORDER BY p.nome_produto ASC, data_validade ASC; ");
         endif;
         
     }
+
+    
 
 
 }

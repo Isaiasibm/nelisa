@@ -10,7 +10,7 @@ if (!defined('URL')) {
 /**
  * Description of AdmsListarUsuario
  *
- * @copyright (c) year, Cesar Szpak - Celke
+ * @copyright (c) 2026, Isaías Moisés - IBM Nelisa
  */
 class AdmsListarUsuario
 {
