@@ -1,57 +1,10 @@
 // ✅ coloca aqui a URL REAL do teu endpoint (ver secção 2 abaixo)
 
-  let carrinhoData = [];
+let carrinhoData = [];
 let vendaEmProcesso = false;
-/* =========================================
-   GERAIS + DATATABLE + POS (CARRINHO)
-   - sem duplicações
-   - sem ready aninhado
-   - bindFinalizarCompra implementado
-========================================= */
+let invoiceLogoBase64 = '';
 
-
-
-$(document).ready(function () {
-
-  // -------------------------
-  // DATATABLE (com proteção)
-  // -------------------------
-  /*
-  if ($.fn.DataTable) {
-    $(".tabelaPersonalizadaDataTable").each(function () {
-      if (!$.fn.DataTable.isDataTable(this)) {
-        $(this).DataTable({
-          pageLength: 5,
-          lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "Todos"]],
-          autoWidth: false,       // ✅ evita widths estranhas
-          responsive: true,      // (se não tiveres extensão responsive)
-          language: {
-            sEmptyTable: "Nenhum registro encontrado",
-            sProcessing: "A processar...",
-            sLengthMenu: "Mostrar _MENU_ registos",
-            sZeroRecords: "Não foram encontrados resultados",
-            sInfo: "Mostrando de _START_ até _END_ de _TOTAL_ registos",
-            sInfoEmpty: "Mostrando de 0 até 0 de 0 registos",
-            sInfoFiltered: "(filtrado de _MAX_ registos no total)",
-            sSearch: "Procurar:",
-            oPaginate: {
-              sFirst: "Primeiro",
-              sPrevious: "Anterior",
-              sNext: "Seguinte",
-              sLast: "Último",
-            },
-            aria: {
-              sSortAscending: ": Ordenar colunas de forma ascendente",
-              sSortDescending: ": Ordenar colunas de forma descendente",
-            },
-          },
-        });
-      }
-    });
-  }
-  */
-
-  function initDataTables() {
+function initDataTables() {
   if (!$.fn.DataTable) return;
 
   $(".tabelaPersonalizadaDataTable").each(function () {
@@ -124,7 +77,18 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   initDataTables();
-});
+
+  // Pré-carrega o logo da fatura em base64 para impressão sem delay de rede
+  if (window.BASE_URL) {
+    fetch(window.BASE_URL + 'imagens/nelisa_img.jpeg')
+      .then(function(r) { return r.blob(); })
+      .then(function(blob) {
+        var reader = new FileReader();
+        reader.onloadend = function() { invoiceLogoBase64 = reader.result; };
+        reader.readAsDataURL(blob);
+      })
+      .catch(function() { invoiceLogoBase64 = ''; });
+  }
 
   // -------------------------
   // PRINT
@@ -544,24 +508,130 @@ function enviarVenda(payload) {
     data: data
   })
   .done(function (res) {
-    if (res && res.success) {
-      alert(res.message + (res.numero_fatura ? ("\nFatura: " + res.numero_fatura) : ""));
+    try {
+      if (res && res.success) {
+        // Preencher e imprimir a fatura existente logo (thermal-invoice)
+        const numero_fatura = res.numero_fatura || 'N/A';
 
-      // limpa carrinho
-      carrinhoData = [];
-      atualizarCarrinho();
+        // Dados da fatura
+        const invoiceData = {
+          date: new Date().toLocaleString('pt-PT'),
+          numero: numero_fatura,
+          items: carrinhoData,
+          total: calcularTotalVenda(),
+          paid: parseFloat($("#total_pago").text()),
+          change: parseFloat($("#troco").text()),
+          nif_cliente: $("#nif_cliente").val() || '',
+          nome_cliente: $("#nome_cliente").val() || '',
+          usuario: window.usuario_nome || ''
+        };
 
-      // reset pagamentos
-      $("#em_dinheiro, #multicaixa, #transferencia").val("");
-      calcularTroco();
+        // Preencher a fatura
+        $("#invoice-number").text(invoiceData.numero);
+        $("#invoice-date").text(invoiceData.date);
+        $("#invoice-nif").text(invoiceData.nif_cliente ? invoiceData.nif_cliente : '000000000');
+        $("#invoice-nome").text(invoiceData.nome_cliente || 'Consumidor Final');
 
-      // fecha checkout
-      if ($("#campos-pagamento").length) $("#campos-pagamento").hide();
-      $("#finalizar-compra").hide();
-      $("#checkout-enable").show();
+        // Injetar logo (base64 pré-carregado evita HTTP extra na impressão)
+        if (invoiceLogoBase64) {
+          $("#invoice-logo").attr('src', invoiceLogoBase64);
+        } else {
+          $("#invoice-logo").attr('src', window.BASE_URL + 'imagens/nelisa_img.jpeg');
+        }
 
-    } else {
-      alert((res && res.message) ? res.message : "Falha ao realizar a venda.");
+        let itemsHtml = '';
+        invoiceData.items.forEach((item) => {
+          const nomeAbreviado = item.nome.substring(0, 25);
+          itemsHtml += `
+            <tr style="line-height: 1.3; border-bottom: 1px dotted #ddd;">
+              <td style="text-align: left; padding: 3px 0; word-wrap: break-word; flex: 1; font-size: 10px;">${nomeAbreviado}</td>
+              <td style="text-align: center; padding: 3px 0; width: 35px; font-size: 10px;">${item.quantidade}</td>
+              <td style="text-align: right; padding: 3px 0; width: 56px; white-space: nowrap; font-size: 10px;">${item.subtotal.toFixed(2)}</td>
+            </tr>
+          `;
+        });
+        $("#invoice-items").html(itemsHtml);
+
+        $("#invoice-total").text(invoiceData.total.toFixed(2) + ' Kz');
+        $("#invoice-paid").text(invoiceData.paid.toFixed(2) + ' Kz');
+        $("#invoice-change").text(invoiceData.change.toFixed(2) + ' Kz');
+
+        // Imprimir a fatura
+        try {
+          const invoiceContent = document.getElementById("thermal-invoice").innerHTML;
+          const printWindow = window.open("", "_blank", "width=400,height=600");
+          if (printWindow) {
+            printWindow.document.open();
+            printWindow.document.write(`
+              <html>
+              <head>
+                <title>Fatura ${invoiceData.numero}</title>
+                <style>
+                  * { margin: 0; padding: 0; box-sizing: border-box; }
+                  @page { size: 80mm auto; margin: 0; }
+                  body {
+                    font-family: Consolas, 'Courier New', monospace;
+                    font-size: 11px;
+                    line-height: 1.4;
+                    width: 80mm;
+                    margin: 0;
+                    padding: 0 0 0 0.6mm;
+                    background: white;
+                  }
+                  h2 { font-size: 15px; font-weight: bold; }
+                  p { margin: 0; padding: 0; }
+                  img { display: block; margin: 0 auto; }
+                  table { width: 100%; border-collapse: collapse; margin: 0; }
+                  th, td { padding: 3px 0; margin: 0; }
+                  @media print {
+                    body { margin: 0; padding: 0 0 0 0.6mm; width: 80mm; }
+                    html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                  }
+                </style>
+              </head>
+              <body>${invoiceContent}</body>
+              </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            var _printed = false;
+            function _doPrint() {
+              if (_printed) return;
+              _printed = true;
+              try { printWindow.print(); } catch (e) { /* impresora não disponível Detalhes */ }
+              try { printWindow.close(); } catch (e) { /* já fechada */ }
+            }
+            printWindow.onload = _doPrint;
+            setTimeout(_doPrint, 400);
+          } else {
+            console.warn("Popup bloqueado pelo browser. Fatura não impressa.");
+          }
+        } catch (printErr) {
+          console.error("Erro ao abrir janela de impressão:", printErr);
+        }
+
+        alert(res.message);
+
+        // limpa carrinho
+        carrinhoData = [];
+        atualizarCarrinho();
+
+        // reset pagamentos
+        $("#em_dinheiro, #multicaixa, #transferencia").val("");
+        $("#nif_cliente, #nome_cliente").val("");
+        calcularTroco();
+
+        // fecha checkout
+        if ($("#campos-pagamento").length) $("#campos-pagamento").hide();
+        $("#finalizar-compra").hide();
+        $("#checkout-enable").show();
+
+      } else {
+        alert((res && res.message) ? res.message : "Falha ao realizar a venda.");
+      }
+    } catch (e) {
+      console.error("Erro ao processar resposta da venda:", e);
+      alert("Ocorreu um erro ao processar a venda. Por favor, verifique o registo antes de tentar novamente.");
     }
   })
   .fail(function (xhr) {
