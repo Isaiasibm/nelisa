@@ -1,9 +1,10 @@
 <?php
+
     header('Content-type: text/html; charset=utf-8');
 
     $idVenda  = (int) ($this->Dados['idVenda'] ?? 0);
     $itens    = $this->Dados['itens'] ?? [];
-    $urlLista = URLADM . 'controleVendas/listarVendas';
+    $urlLista = URLADM . 'vendas/listar';
 ?>
 <div class="content p-1">
     <div class="list-group-item">
@@ -110,7 +111,7 @@
 <div class="modal fade" id="modalDevolverItem" tabindex="-1" role="dialog"
      aria-labelledby="modalDevolverItemLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="POST" action="<?php echo URLADM . 'controleVendas/devolverItem'; ?>">
+        <form method="POST" action="<?php echo URLADM . 'Vendas/devolverItem'; ?>">
             <!-- campos ocultos -->
             <input type="hidden" name="id_venda"      value="<?php echo $idVenda; ?>">
             <input type="hidden" name="id_item_venda" id="modalIdItemVenda" value="">

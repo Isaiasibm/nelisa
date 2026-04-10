@@ -97,7 +97,7 @@
                         <button type="submit" class="btn btn-success btn-sm" name="btnFiltrarRelatorio" value="1">
                             <i class="fas fa-search"></i> Listar
                         </button>
-                        <a href="<?php echo URLADM . 'controleVendas/relatVendas'; ?>" class="btn btn-secondary btn-sm">Limpar</a>
+                        <a href="<?php echo URLADM . 'Vendas/relatVendas'; ?>" class="btn btn-secondary btn-sm">Limpar</a>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
             endif;
         ?>
 
-        <div class="form-row">
+        <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered tabelaPersonalizadaDataTable" data-page-length="10" data-priority="0,1,4">
                     <thead>
                         <tr>
@@ -166,8 +166,9 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
+        </div>
 
+        <div class="mt-3">
             <button class="btn btn-success btn-print">Gerar PDF</button>
         </div>
 

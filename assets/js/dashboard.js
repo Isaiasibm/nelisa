@@ -3,6 +3,7 @@ $(document).ready(function () {
 
     var $sidebar = $('.sidebar');
     var $body = $('body');
+    var menuInitialized = false;
 
     function isMobile() {
         return $(window).width() <= 768;
@@ -44,11 +45,23 @@ $(document).ready(function () {
         }
     }
 
-    // ✅ ÚNICO handler do botão do menu
-    $('.sidebar-toggle').on('click', function (e) {
-        e.preventDefault();
-        toggleMenu();
-    });
+    // ✅ Garante que o menu responde ao clique
+    function initMenuToggle() {
+        if (!menuInitialized) {
+            // Remove handlers antigos se existirem
+            $('.sidebar-toggle').off('click');
+            // Adiciona novo handler com múltiplas tentativas
+            $(document).on('click', '.sidebar-toggle', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+                return false;
+            });
+            menuInitialized = true;
+        }
+    }
+    
+    initMenuToggle();
 
     // manter submenu ativo aberto
     var active = $('.sidebar .active');
@@ -61,6 +74,12 @@ $(document).ready(function () {
     // Ajustar ao redimensionar (estado consistente)
     $(window).on('resize', function () {
         closeMenu(); // fecha sempre ao mudar de tamanho
+    });
+    
+    // Fallback: reinicializa o handler se necessário
+    $(document).on('ajaxComplete', function() {
+        menuInitialized = false;
+        initMenuToggle();
     });
 });
 

@@ -99,7 +99,7 @@
                         <button type="submit" name="btnFiltrarVendas" value="1" class="btn btn-success btn-sm">
                             <i class="fas fa-search"></i> Filtrar
                         </button>
-                        <a href="<?php echo URLADM . 'controleVendas/listarVendas'; ?>" class="btn btn-secondary btn-sm">
+                        <a href="<?php echo URLADM . ''; ?>" class="btn btn-secondary btn-sm">
                             Limpar
                         </a>
                     </div>
@@ -139,7 +139,7 @@
                             ? "<span class='badge badge-warning'>{$qtdDevol}</span>"
                             : "<span class='text-muted'>0</span>";
 
-                        $urlItens = URLADM . "controleVendas/itensDaVenda/{$id}";
+                        $urlItens = URLADM . "Vendas/itensDaVenda/{$id}";
                 ?>
                 <tr>
                     <td><?php echo $id; ?></td>
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ao clicar em "Devolver tudo", configura o action do form e abre o modal
     $(document).on('click', '.btnDevolverTudo', function () {
         var idVenda = $(this).data('id');
-        var url = '<?php echo URLADM; ?>controleVendas/devolverVendaCompleta/' + idVenda;
+        var url = '<?php echo URLADM; ?>Vendas/devolverVendaCompleta/' + idVenda;
         $('#formDevolverTudo').attr('action', url);
         $('#motivoDevolucaoCompleta').val('');
         $('#modalDevolverTudo').modal('show');

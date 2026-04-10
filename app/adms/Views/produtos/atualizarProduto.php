@@ -2,7 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 
 <!-- jQuery (necessário para o Select2) -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Script do Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -16,16 +16,16 @@
         </div>
         <hr>
         <?php
-        if (isset($_SESSION['msg'])) {
-            echo $_SESSION['msg'];
-            unset($_SESSION['msg']);
-        }
-        if (isset($_SESSION['msgcad'])) {
-            echo $_SESSION['msgcad'];
-            unset($_SESSION['msgcad']);
-        }
+            if (isset($_SESSION['msg'])) {
+                echo $_SESSION['msg'];
+                unset($_SESSION['msg']);
+            }
+            if (isset($_SESSION['msgcad'])) {
+                echo $_SESSION['msgcad'];
+                unset($_SESSION['msgcad']);
+            }
         ?>
-        <form method="POST" action="" enctype="multipart/form-data"> 
+        <form method="POST" action="" enctype="multipart/form-data">
 
             <!-- Campo Único para Código de Barras ou Nome do Produto -->
             <div class="form-group">
@@ -33,12 +33,12 @@
                 <select class="form-control select2" name="id_produto" id="select-produto" required>
                     <option value="">Digite, escaneie ou selecione um produto...</option>
                     <?php
-                     $vis = new \App\adms\Models\helper\AdmsRead();
-                     $vis->ExeRead('tb_produtos');
-                    foreach ($vis->getResultado() as $produto) {
-                        extract($produto);
-                        echo "<option value='{$id_produto}'>({$bar_code}) {$nome_produto}</option>";
-                    }
+                        $vis = new \App\adms\Models\helper\AdmsRead();
+                        $vis->ExeRead('tb_produtos');
+                        foreach ($vis->getResultado() as $produto) {
+                            extract($produto);
+                            echo "<option value='{$id_produto}'>{$id_produto} - ({$bar_code}) {$nome_produto}</option>";
+                        }
                     ?>
                 </select>
             </div>
@@ -56,18 +56,18 @@
                         <select class="form-control" name="id_tipo_produto" required="" id="id_tipo_produto">
                             <option value="">Selecione o tipo</option>
                             <?php
-                            $vis = new \App\adms\Models\helper\AdmsRead();
-                            $vis->ExeRead('tb_tipo_produto');
+                                $vis = new \App\adms\Models\helper\AdmsRead();
+                                $vis->ExeRead('tb_tipo_produto');
 
-                            foreach ($vis->getResultado() as $doc):
-                                extract($doc);
-                                $idTipo = $doc['id'];
-                                $descricaoTipo = $doc['descrição'];
-                                echo "<option value='$idTipo'>$descricaoTipo</option>";
-                            endforeach;
+                                foreach ($vis->getResultado() as $doc):
+                                    extract($doc);
+                                    $idTipo        = $doc['id'];
+                                    $descricaoTipo = $doc['descrição'];
+                                    echo "<option value='$idTipo'>$descricaoTipo</option>";
+                                endforeach;
                             ?>
                         </select>
-                </div> 
+                </div>
             </div>
 
             <input type="submit" class="btn btn-success" name="btnSubmitProduto" value="Atualizar">
@@ -78,10 +78,21 @@
 <!-- Scripts para inicializar o Select2 e automação do código de barras -->
 <script>
     $(document).ready(function() {
-        // Inicializa o Select2
+        // Inicializa o Select2 com busca
         $('#select-produto').select2({
             placeholder: "Digite, escaneie ou selecione um produto...",
-            allowClear: true
+            allowClear: true,
+            language: "pt-BR",
+            matcher: function(params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+                var term = params.term.toLowerCase();
+                if (data.text.toLowerCase().indexOf(term) > -1) {
+                    return data;
+                }
+                return null;
+            }
         });
 
         // Preenche automaticamente o campo de código de barras ao selecionar um produto
@@ -89,12 +100,12 @@
             var selectedOption = $(this).find('option:selected');
             var barcode = selectedOption.text().match(/\((.*?)\)/); // Captura o código de barras dentro dos parênteses
             if (barcode) {
-                $('#barcode').val(barcode[1]); // Preenche o campo de código de barras automaticamente
+                $('#bar_code').val(barcode[1]); // Preenche o campo de código de barras automaticamente
             }
         });
 
         // Seleciona automaticamente o produto ao escanear um código de barras
-        $('#barcode').on('change', function() {
+        $('#bar_code').on('change', function() {
             var barcodeValue = $(this).val().trim();
             if (barcodeValue !== "") {
                 $("#select-produto option").each(function() {

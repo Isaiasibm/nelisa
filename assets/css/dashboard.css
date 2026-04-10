@@ -58,12 +58,16 @@ body{
   background-color: #222c3c;
   min-width: var(--sidebar-w);
   max-width: var(--sidebar-w);
-  transition: all 0.25s ease;
 }
 
-/* Desktop toggle */
-.sidebar.toggled{
-  margin-left: calc(-1 * var(--sidebar-w));
+/* Desktop styles */
+@media (min-width: 769px) {
+  .sidebar {
+    transition: margin-left 0.25s ease;
+  }
+  .sidebar.toggled{
+    margin-left: calc(-1 * var(--sidebar-w));
+  }
 }
 
 /* Links */
@@ -165,11 +169,15 @@ body{
     width: var(--sidebar-w);
     height: calc(100vh - var(--nav-h));
     margin-left: 0;
+    margin-top: 0;
     z-index: 1050;
-    transition: left .25s ease;
+    transition: left 0.25s ease !important;
     overflow-y: auto;
   }
-  .sidebar.toggled{ left: 0; }
+  .sidebar.toggled{
+    left: 0 !important;
+    margin-left: 0 !important;
+  }
 
   #menuOverlay{
     display: none;
@@ -178,8 +186,9 @@ body{
     left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.45);
     z-index: 1040;
+    transition: opacity 0.25s ease;
   }
-  #menuOverlay.show{ display:block; }
+  #menuOverlay.show{ display:block; opacity: 1; }
   body.menu-open{ overflow:hidden; }
 
   .titulo{
