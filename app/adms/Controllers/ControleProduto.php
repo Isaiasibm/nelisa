@@ -1,20 +1,20 @@
 <?php
-
 namespace App\adms\Controllers;
 
 date_default_timezone_set('Africa/Luanda');
 
-if (!defined('URL')) {
+if (! defined('URL')) {
     header("Location: /");
-    exit(); 
+    exit();
 }
- 
+
 /**
  * Controller Produto
  *
  * @copyright (c) 2019, IBM - NELISA
  */
-class ControleProduto {
+class ControleProduto
+{
 
     private $Resultado;
     private $Dados;
@@ -23,23 +23,24 @@ class ControleProduto {
     private $LimiteResultado = 40;
     private $ResultadoPg;
 
-    function getResultadoPg()
+    public function getResultadoPg()
     {
         return $this->ResultadoPg;
     }
 
-   function getResultado()
+    public function getResultado()
     {
         return $this->Resultado;
     }
 
-    public function registarProduto() {
+    public function registarProduto()
+    {
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-      
+
         $cadProduto = new \App\adms\Models\admsProduto();
-     
-        if (!empty($this->Dados['btnSubmitProduto'])):
+
+        if (! empty($this->Dados['btnSubmitProduto'])):
             unset($this->Dados['btnSubmitProduto']);
 
             /*
@@ -48,95 +49,87 @@ class ControleProduto {
                 $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
               
           }else{        
-          */  
+          */
 
-        // ====================== Script Para Registar Dados do Produto ====================
+            // ====================== Script Para Registar Dados do Produto ====================
 
-                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],'nome_produto'=>$this->Dados["nome_produto"], 'descricao_produto'=>$this->Dados["descricao_produto"], 
-            'id_categoria'=>$this->Dados["id_categoria"],
-            'id_fabricante'=>$this->Dados["id_fabricante"],
-        'id_tipo_produto'=>$this->Dados["id_tipo_produto"],
-        'estoque_min'=>$this->Dados["estoque_minimo"],
-        'id_user'=> (int) $_SESSION['usuario_id'], 
-        'created_at'=>date('Y-m-d H:i:s'));
-          
+            #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            $dadosProduto = ['bar_code' => $this->Dados["bar_code"], 'nome_produto' => $this->Dados["nome_produto"], 'descricao_produto' => $this->Dados["descricao_produto"],
+                'id_categoria'                   => $this->Dados["id_categoria"],
+                'id_fabricante'                  => $this->Dados["id_fabricante"],
+                'id_tipo_produto'                => $this->Dados["id_tipo_produto"],
+                'estoque_min'                    => $this->Dados["estoque_minimo"],
+                'id_user'                        => (int) $_SESSION['usuario_id'],
+                'created_at'                     => date('Y-m-d H:i:s')];
+
             $cadProduto->cadastrarProduto($dadosProduto);
 
-            if($cadProduto->getResultado()>=1){
+            if ($cadProduto->getResultado() >= 1) {
 
-                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto registado com sucesso!
-                                    </div>";
-                                    unset($this->Dados);
-                    }
-                    else{
+                $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto registado com sucesso!
+	                                    </div>";
+                unset($this->Dados);
+            } else {
 
-                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível registar o produto"."</div>";
-                    }
-           
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>" . "Não foi possível registar o produto" . "</div>";
+            }
+
         //===================================== Fim Script regista Produto ==============================
-            
-        endif; 
-        $listarMenu = new \App\adms\Models\AdmsMenu();
+
+        endif;
+        $listarMenu          = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/produtos/registarProduto", $this->Dados);
+        $carregarView        = new \Core\ConfigView("adms/Views/produtos/registarProduto", $this->Dados);
         $carregarView->renderizar();
 
-        
     }
 
-    
-    public function editarProduto() {
+    public function editarProduto()
+    {
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-      
+
         $cadProduto = new \App\adms\Models\admsProduto();
-     
-        if (!empty($this->Dados['btnSubmitProduto'])):
+
+        if (! empty($this->Dados['btnSubmitProduto'])):
             unset($this->Dados['btnSubmitProduto']);
-  
 
-   // ====================== Script Para Registar Dados do Produto ====================
+            // ====================== Script Para Registar Dados do Produto ====================
 
-                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],'id_tipo_produto'=>$this->Dados["id_tipo_produto"],
-        'id_user'=> (int) $_SESSION['usuario_id'], 'updated_at'=>date('Y-m-d H:i:s'));
-          
+            #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            $dadosProduto = ['bar_code' => $this->Dados["bar_code"], 'id_tipo_produto' => $this->Dados["id_tipo_produto"],
+                'id_user'                        => (int) $_SESSION['usuario_id'], 'updated_at' => date('Y-m-d H:i:s')];
+
             $cadProduto->editarProduto($dadosProduto, $this->Dados["id_produto"]);
 
-            if($cadProduto->getResultado()>=1){
+            if ($cadProduto->getResultado() >= 1) {
 
-                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto atualizado com sucesso!
-                                    </div>";
-                                    unset($this->Dados);
-                    }
-                    else{
+                $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto atualizado com sucesso!
+	                                    </div>";
+                unset($this->Dados);
+            } else {
 
-                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível atualizar o produto"."</div>";
-                    }
-           
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>" . "Não foi possível atualizar o produto" . "</div>";
+            }
+
         //===================================== Fim Script regista Produto ==============================
-            
-        endif; 
-        $listarMenu = new \App\adms\Models\AdmsMenu();
+
+        endif;
+        $listarMenu          = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/produtos/atualizarProduto", $this->Dados);
+        $carregarView        = new \Core\ConfigView("adms/Views/produtos/atualizarProduto", $this->Dados);
         $carregarView->renderizar();
 
-        
     }
 
-
-
-    public function adicionarProdutoEstoque() {
-
+    public function adicionarProdutoEstoque()
+    {
 
         $this->Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-      
+
         $cadProduto = new \App\adms\Models\admsProduto();
-      
-      
-        if (!empty($this->Dados['btnSubmitProduto'])):
+
+        if (! empty($this->Dados['btnSubmitProduto'])):
             unset($this->Dados['btnSubmitProduto']);
 
             /*
@@ -145,65 +138,55 @@ class ControleProduto {
                 $_SESSION['msgcad'] = "<div class='alert alert-danger'>O número do documento que tentou registar, já existe!</div>";
               
           }else{        
-          */  
+          */
 
-        // ====================== Script Para Registar Dados do Produto ====================
+            // ====================== Script Para Registar Dados do Produto ====================
 
-                    #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
-            $dadosProduto = array('bar_code'=>$this->Dados["bar_code"],'nome_produto'=>$this->Dados["nome_produto"], 'descricao_produto'=>$this->Dados["descricao_produto"], 
-            'id_categoria'=>$this->Dados["id_categoria"],'preco_compra'=>$this->Dados["preco_compra"],'preco_venda'=>$this->Dados["preco_venda"],
-            'quantidade_estoque'=>$this->Dados["quantidade_estoque"],'id_fabricante'=>$this->Dados["id_fabricante"],'id_forncedor'=>$this->Dados["id_forncedor"],'data_fabrico'=>$this->Dados["data_fabrico"],
-            'data_validade'=>$this->Dados["data_validade"],'data_compra'=>$this->Dados["data_compra"],'id_tipo_produto'=>$this->Dados["id_tipo_produto"],'quantidade_pacote'=>$this->Dados["quantPacote"],'id_user'=> (int) $_SESSION['usuario_id'],'created_at'=>date('Y-m-d H:i:s'));
-            
-            
-            
+            #ARRAY DE DADOS PARA INSERIR NA TABELA PRODUTO
+            $dadosProduto = ['bar_code' => $this->Dados["bar_code"], 'nome_produto'            => $this->Dados["nome_produto"], 'descricao_produto' => $this->Dados["descricao_produto"],
+                'id_categoria'                   => $this->Dados["id_categoria"], 'preco_compra'        => $this->Dados["preco_compra"], 'preco_venda'       => $this->Dados["preco_venda"],
+                'quantidade_estoque'             => $this->Dados["quantidade_estoque"], 'id_fabricante' => $this->Dados["id_fabricante"], 'id_forncedor'     => $this->Dados["id_forncedor"], 'data_fabrico'         => $this->Dados["data_fabrico"],
+                'data_validade'                  => $this->Dados["data_validade"], 'data_compra'        => $this->Dados["data_compra"], 'id_tipo_produto'    => $this->Dados["id_tipo_produto"], 'quantidade_pacote' => $this->Dados["quantPacote"], 'id_user' => (int) $_SESSION['usuario_id'], 'created_at' => date('Y-m-d H:i:s')];
+
             $cadProduto->cadastrarProduto($dadosProduto);
 
-            if($cadProduto->getResultado()>=1){
+            if ($cadProduto->getResultado() >= 1) {
 
-                                    $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto registado com sucesso!
-                                    </div>";
-                                    unset($this->Dados);
-                    }
-                    else{
+                $_SESSION['msgcad'] = "<div class='alert alert-success'>Produto registado com sucesso!
+	                                    </div>";
+                unset($this->Dados);
+            } else {
 
-                        $_SESSION['msgcad'] = "<div class='alert alert-danger'>"."Não foi possível registar o produto"."</div>";
-                    }
-           
+                $_SESSION['msgcad'] = "<div class='alert alert-danger'>" . "Não foi possível registar o produto" . "</div>";
+            }
+
         //===================================== Fim Script regista Produto ==============================
-            
-        endif; 
-        $listarMenu = new \App\adms\Models\AdmsMenu();
+
+        endif;
+        $listarMenu          = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-        $carregarView = new \Core\ConfigView("adms/Views/produtos/adicionarProdutoEstoque", $this->Dados);
+        $carregarView        = new \Core\ConfigView("adms/Views/produtos/adicionarProdutoEstoque", $this->Dados);
         $carregarView->renderizar();
 
-        
     }
 
-
-    public function listarProduto($PageId = null)
+    public function listarProduto()
     {
-        $this->PageId = (int) $PageId ? $PageId : 1;
+        // $this->PageId = (int) $PageId ? $PageId : 1;
 
         $botao = ['cad_pagina' => ['menu_controller' => 'cadastrar-pagina', 'menu_metodo' => 'cad-pagina'],
-            'vis_pagina' => ['menu_controller' => 'ver-pagina', 'menu_metodo' => 'ver-pagina'],
-            'edit_pagina' => ['menu_controller' => 'editar-pagina', 'menu_metodo' => 'edit-pagina'],
-            'del_pagina' => ['menu_controller' => 'apagar-pagina', 'menu_metodo' => 'apagar-pagina']];
-        $listarBotao = new \App\adms\Models\AdmsBotao();
+            'vis_pagina'           => ['menu_controller' => 'ver-pagina', 'menu_metodo' => 'ver-pagina'],
+            'edit_pagina'          => ['menu_controller' => 'editar-pagina', 'menu_metodo' => 'edit-pagina'],
+            'del_pagina'           => ['menu_controller' => 'apagar-pagina', 'menu_metodo' => 'apagar-pagina']];
+
+        $listarBotao          = new \App\adms\Models\AdmsBotao();
         $this->Dados['botao'] = $listarBotao->valBotao($botao);
 
-        $listarMenu = new \App\adms\Models\AdmsMenu();
+        $listarMenu          = new \App\adms\Models\AdmsMenu();
         $this->Dados['menu'] = $listarMenu->itemMenu();
-
-        $listarProduto = new \App\adms\Models\AdmsListarProduto();
-        $this->Dados['listPagina'] = $listarProduto->listarProduto($this->PageId);
-        $this->Dados['paginacao'] = $listarProduto->getResultadoPg();
 
         $carregarView = new \Core\ConfigView("adms/Views/produtos/listarProduto", $this->Dados);
         $carregarView->renderizar();
     }
-  
-    
 
 }

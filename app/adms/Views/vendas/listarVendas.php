@@ -5,7 +5,7 @@
     <div class="list-group-item">
         <div class="d-flex">
             <div class="mr-auto p-2">
-                <h3 class="display-2 titulo">Devoluções — Vendas</h3>
+                <h3 class="display-2 titulo">Vendas realizadas</h3>
             </div>
             <div class="p-2">
                 <a href="<?php echo URLADM . 'home/index/'; ?>" class="btn badge badge-danger btn-sm px-1"
@@ -149,20 +149,22 @@
                     <td class="text-center"><?php echo $qtdItens; ?></td>
                     <td class="text-center"><?php echo $labelDevol; ?></td>
                     <td class="text-center" style="white-space:nowrap;">
-                        <!-- Ver itens -->
-                        <a href="<?php echo $urlItens; ?>"
-                            class="btn btn-sm btn-info"
-                            title="Ver itens desta venda">
-                            <i class="fas fa-list"></i> Itens
-                        </a>
-
-                        <!-- Devolver tudo (abre modal) -->
-                        <button type="button"
-                            class="btn btn-sm btn-danger btnDevolverTudo"
-                            data-id="<?php echo $id; ?>"
-                            title="Devolver venda completa">
-                            <i class="fas fa-undo"></i> Devolver tudo
-                        </button>
+                        <div class="dropdown d-inline-block">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ações
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="<?php echo $urlItens; ?>" class="dropdown-item" title="Ver itens desta venda">
+                                    <i class="fas fa-list"></i> Devolver Itens
+                                </a>
+                                <button type="button" class="dropdown-item btnDevolverTudo" data-id="<?php echo $id; ?>" title="Devolver venda completa">
+                                    <i class="fas fa-undo"></i> Devolver Venda Completa
+                                </button>
+                                <a href="#" class="dropdown-item" title="Reimprimir fatura">
+                                    <i class="fas fa-print"></i> Reimprimir fatura
+                                </a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -1,4 +1,4 @@
-core/Config.php
+
 .htaccess
 index.php
 registrar_paginas_turno.php
@@ -11,4 +11,22 @@ IMPLEMENTACAO_VENDAS_CORRECAO.md
 database_shifts_migration.sql
 /database
 CHECLIST_IMPLEMENTACAO.md
+.gitignore
 
+# Logs
+error_log
+*.log
+
+# Scripts temporários
+script.php
+
+# Configurações sensíveis
+.env
+core/Config.php
+app/adms/Config.php
+config.php
+
+# Dependências/cache
+vendor/
+node_modules/
+.cache/

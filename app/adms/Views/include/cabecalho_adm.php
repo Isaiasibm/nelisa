@@ -26,13 +26,20 @@ if (!defined('URL')) {
 
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/dataTables.bootstrap4.min.css'; ?>">
+    <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/datatables.min.css'; ?>">
 
-   <link href="https://cdn.datatables.net/v/bs4/dt-2.3.7/r-3.0.8/datatables.min.css" rel="stylesheet" integrity="sha384-iIA1v+h7y5huqT/4gPPivkpvZenGQ4GPhS3rlIolp5LaKPRoVzNyMm+4ekOVBerF" crossorigin="anonymous">
+   <!-- <link href="https://cdn.datatables.net/v/bs4/dt-2.3.7/r-3.0.8/datatables.min.css" rel="stylesheet" integrity="sha384-iIA1v+h7y5huqT/4gPPivkpvZenGQ4GPhS3rlIolp5LaKPRoVzNyMm+4ekOVBerF" crossorigin="anonymous"> -->
  
 
     <!-- Select2 - Adicionando Importação Global -->
 
     <link rel="stylesheet" href="<?php echo URLADM . 'assets/css/select2.min.css'; ?>">
+
+    <!-- jQuery (necessário para o Select2) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Script do Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     
     <script>

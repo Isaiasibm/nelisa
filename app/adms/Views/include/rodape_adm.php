@@ -23,12 +23,16 @@
 <script src="<?php echo URLADM . 'assets/js/dataTables.bootstrap4.min.js'; ?>"></script>
 
 <script src="<?php echo URLADM . 'assets/js/jQuery.print.min.js'; ?>"></script>
-<script src="https://cdn.datatables.net/v/bs4/dt-2.3.7/r-3.0.8/datatables.min.js" integrity="sha384-wIjTjnH2w/VIAfsI//Q16ut0iYxO5QLXuJ36t6VTWj4BExsJgbbLoDzjA0tHCWmf" crossorigin="anonymous"></script>
+
+<script src="<?php echo URLADM . 'assets/js/datatables.min.js'; ?>"></script>
+<!-- <script src="https://cdn.datatables.net/v/bs4/dt-2.3.7/r-3.0.8/datatables.min.js" integrity="sha384-wIjTjnH2w/VIAfsI//Q16ut0iYxO5QLXuJ36t6VTWj4BExsJgbbLoDzjA0tHCWmf" crossorigin="anonymous"></script> -->
 
 
 <!-- Select2 - Adicionando Importação Global -->
 
 <script src="<?php echo URLADM . 'assets/js/select2.min.js'; ?>"></script>
+
+
 
 
 

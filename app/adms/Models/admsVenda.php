@@ -508,7 +508,7 @@ class AdmsVenda
      * 6) DEVOLUÇÃO
      * ========================================================= */
 
-    /** Lista todas as vendas com resumo (totais, vendedor, qtd devolvida) */
+    /** Lista todas as vendas com resumo (totais, vendedor, qtd devolvida)  */
     public function listarVendasComResumo(): array
     {
         $read = new \App\adms\Models\helper\AdmsRead();
@@ -525,7 +525,7 @@ class AdmsVenda
              LEFT JOIN tb_item_venda i   ON i.id_venda = v.id_venda
              LEFT JOIN tb_devolucao_item di ON di.id_item_venda = i.id_item_venda
              GROUP BY v.id_venda, v.data_venda, v.total, u.nome
-             ORDER BY v.data_venda DESC"
+             ORDER BY v.data_venda DESC limit 1000"
         );
         return $read->getResultado() ?: [];
     }
